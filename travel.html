@@ -25,10 +25,10 @@
           <li class="has-submenu">
             <a href="#">Products ▾</a>
             <ul class="submenu">
-              <li><a href="travel.html">Travel</a></li>
-              <li><a href="fire.html">Fire</a></li>
-              <li><a href="car.html">Car</a></li>
-              <li><a href="marine.html">Marine</a></li>
+              <li><a href="travel.html">Travel Insurance</a></li>
+              <li><a href="fire.html">Fire Insurance</a></li>
+              <li><a href="car.html">Car Insurance</a></li>
+              <li><a href="marine.html">Marine Insurance</a></li>
             </ul>
           </li>
           <li><a href="index.html#partners">Partners</a></li>
@@ -40,7 +40,7 @@
 
   <!-- Hero Banner -->
   <section class="hero">
-    <img src="assets/images/banner1.jpg" alt="Travel Insurance Banner">
+    <img src="images/banner.jpg" alt="Travel Insurance Banner">
   </section>
 
   <!-- Product Details -->
@@ -51,33 +51,20 @@
 
       <div class="grid cards">
         <div class="card">
-          <h3>Basic Plan</h3>
-          <p>Medical coverage up to $50,000</p>
-          <p>Trip delay coverage: $500</p>
-          <p>Price: $30 / trip</p>
-          <button class="btn">Get Quote</button>
-        </div>
-
-        <div class="card">
-          <h3>Premium Plan</h3>
-          <p>Medical coverage up to $150,000</p>
-          <p>Trip delay coverage: $1500</p>
-          <p>Baggage coverage up to $2000</p>
-          <p>Price: $80 / trip</p>
-          <button class="btn">Get Quote</button>
+          <a href="travelInsurancPrice.html" class="btn">Buy Now</a>
         </div>
       </div>
     </div>
   </section>
 
   <!-- CTA / Request Quote -->
-  <section class="section quote">
+  <section class="section quote frome_data">
     <div class="container">
       <h2>Request a Travel Quote</h2>
       <form id="contactForm" class="quote-form" action="#">
-        <input type="text" name="name" placeholder="Full Name" required>
-        <input type="email" name="email" placeholder="Email Address" required>
-        <textarea name="message" placeholder="Additional Information"></textarea>
+        <input type="text" name="name" placeholder="Full Name" required class="input_data">
+        <input type="email" name="email" placeholder="Email Address" required class="input_data">
+        <textarea name="message" placeholder="Additional Information" class="input_data"></textarea>
         <button type="submit" class="btn">Submit</button>
         <div id="formMsg" class="form-msg"></div>
       </form>

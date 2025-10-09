@@ -30,9 +30,10 @@ window.addEventListener('scroll', () => {
 // HERO SLIDER WITH ENHANCEMENTS
 // ===========================
 const slides = [
-  { src: 'assets/images/banner1.jpg', alt: 'Banner 1' },
-  { src: 'assets/images/banner2.jpg', alt: 'Banner 2' },
-  { src: 'assets/images/banner3.jpg', alt: 'Banner 3' }
+  { src: 'images/banner.jpg', alt: 'Banner 1' },
+  { src: 'images/banner2.png', alt: 'Banner 2' },
+  { src: 'images/banner3.png', alt: 'Banner 3' },
+  { src: 'images/banner4.png', alt: 'Banner 3' }
 ];
 
 const slider = document.getElementById('heroSlider');

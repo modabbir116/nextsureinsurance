@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>SafeCare — OMP Travel Insurance Calculator</title>
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg,#007bff,#00c6ff);
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      padding: 18px;
+    }
+    .card {
+      background: rgba(255,255,255,0.12);
+      backdrop-filter: blur(8px);
+      padding: 26px;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+      width: 720px;
+      max-width: 100%;
+    }
+    h2 { margin-bottom: 12px; }
+    label { display:block; text-align:left; font-weight:600; margin-top:10px; margin-bottom:6px; color:#fff; }
+    input, select, button {
+      width:100%; padding:10px; border-radius:10px; border:none; font-size:15px; margin-bottom:12px; outline:none;
+    }
+    input, select { background:#fff; color:#222; }
+    button {
+      background:#007bff; color:#fff; font-weight:700; cursor:pointer; transition:background .2s;
+      padding:12px;
+    }
+    button:hover { background:#0056b3; }
+    .result { display:none; margin-top:14px; font-size:15px; color:#fff; background: rgba(0,0,0,0.14); padding:16px; border-radius:8px; }
+    .age-display { font-size:14px; color:#fff; margin-top:-8px; margin-bottom:10px; }
+    .flex { display:flex; gap:10px; }
+    .half { width:50%; }
+    .info { font-size:13px; opacity:0.95; color:#fff; margin-top:6px; }
+    .breakdown { text-align:left; margin-top:8px; line-height:1.6; }
+    hr.sep { border:none; border-top:1px solid rgba(255,255,255,0.12); margin:10px 0; }
+    .small { font-size:13px; opacity:0.95; color:#fff; }
+    .row { display:flex; gap:8px; }
+    .col { flex:1; }
+    @media (max-width:720px){ .card{width:96%;} .flex{flex-direction:column;} .half{width:100%;} }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>🧾 SafeCare — OMP Travel Insurance Calculator</h2>
+
+    <div class="row">
+      <div class="col">
+        <label for="sub_type_id">Insurance Sub Type</label>
+        <select id="sub_type_id">
+          <option value="">Select Type</option>
+          <option value="10">Business &amp; Holiday</option>
+          <option value="13">Studies (Student)</option>
+        </select>
+      </div>
+
+      <div class="col">
+        <label for="country">Destination Country / Region</label>
+        <select id="country">
+          <option value="">Select Destination</option>
+          <option value="WorldExclUSCA">World Excluding USA &amp; Canada (Schengen)</option>
+          <option value="WorldInclUSCA">World Including USA &amp; Canada (Schengen)</option>
+          <option value="WorldExclUSCA_NonSch">World Excluding USA &amp; Canada (Non-Schengen)</option>
+          <option value="WorldInclUSCA_NonSch">World Including USA &amp; Canada (Non-Schengen)</option>
+          <option value="United States">United States</option>
+          <option value="Canada">Canada</option>
+          <option value="France">France</option>
+          <option value="Germany">Germany</option>
+          <option value="Italy">Italy</option>
+          <option value="Spain">Spain</option>
+          <option value="United Kingdom">United Kingdom</option>
+          <option value="Bangladesh">Bangladesh</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+    </div>
+
+    <label for="dob">Date of Birth</label>
+    <input type="date" id="dob" onchange="calculateAge()" />
+    <div class="age-display" id="ageDisplay">Your Age: —</div>
+
+    <label for="days">Travel Duration (days)</label>
+    <input type="number" id="days" placeholder="Enter number of travel days (or total study days)" min="1"/>
+
+    <div class="flex">
+      <div class="half">
+        <label for="adminPct">Admin Fee (%)</label>
+        <input id="adminPct" type="number" placeholder="e.g. 5" min="0" step="0.1" value="0"/>
+      </div>
+      <div class="half">
+        <label for="multiplier">Multiplier / Change</label>
+        <input id="multiplier" type="number" placeholder="e.g. 1" min="0.01" step="0.01" value="1"/>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <button onclick="calculatePrice()">Calculate Price</button>
+      </div>
+      <div class="col">
+        <button onclick="resetForm()" style="background:#28a745">Reset</button>
+      </div>
+    </div>
+
+    <div class="result" id="resultBox" aria-live="polite"></div>
+    <div class="info small">All Net Premiums come from the Nextsure OMP rate chart. VAT is fixed at 15% (editable in code if needed).</div>
+  </div>
+
+  <script>
+    /************************************************************************
+     * Full rate tables (embedded from uploaded PDF)
+     *
+     * Structure: rates["<Plan>-<Region>-<Type>"][ageBand][durationKey] = netPremium
+     *
+     * Plan: A/B/C/D
+     * Region: Schengen | NonSchengen
+     * Type: BH (Business & Holiday) | ST (Study)
+     *
+     * Duration keys:
+     * - BH uses day ranges: "1-14","15-21","22-28","29-35","36-47","48-60","61-75","76-90","91-120","121-147","148-180"
+     * - ST uses months: "1month","6month","7month","8month","9month","10month","11month","12month"
+     *
+     * IMPORTANT: numbers taken from the PDF you uploaded. If any row needs correction,
+     * tell me which plan/age/duration and I will fix it.
+     ************************************************************************/
+
+    const rates = {
+      /* ------------------ PLAN A — SCHENGEN — BUSINESS & HOLIDAY ------------------ */
+      "A-Schengen-BH": {
+        "0.5-40": { "1-14": 1549, "15-21": 1614, "22-28": 1808, "29-35": 2229, "36-47": 2553, "48-60": 3002, "61-75": 3712, "76-90": 4438, "91-120": 7503, "121-147": 9038, "148-180": 12557 },
+        "41-50":  { "1-14": 2324, "15-21": 2479, "22-28": 2767, "29-35": 3341, "36-47": 3830, "48-60": 4537, "61-75": 5600, "76-90": 6639, "91-120": 11330, "121-147": 13586, "148-180": 18741 },
+        "51-65":  { "1-14": 2673, "15-21": 2851, "22-28": 3182, "29-35": 3842, "36-47": 4405, "48-60": 5218, "61-75": 6440, "76-90": 7635, "91-120": 13030, "121-147": 15624, "148-180": 21552 },
+        "66-70":  { "1-14": 3124, "15-21": 3330, "22-28": 3719, "29-35": 4491, "36-47": 5148, "48-60": 6099, "61-75": 7528, "76-90": 8926 },
+        "71-75":  { "1-14": 10164, "15-21": 10836, "22-28": 12098, "29-35": 14617, "36-47": 16753, "48-60": 19842, "61-75": 24498, "76-90": 29040 },
+        "76-79":  { "1-14": 17788, "15-21": 18962, "22-28": 21170, "29-35": 25578, "36-47": 29318, "48-60": 34724, "61-75": 42871, "76-90": 50820 },
+        "80-85":  { "1-14": 35574, "15-21": 37924, "22-28": 42340, "29-35": 51157, "36-47": 58636, "48-60": 69448, "61-75": 85743, "76-90": 101640 }
+      },
+
+      /* ------------------ PLAN A — NON-SCHENGEN — BUSINESS & HOLIDAY ------------------ */
+      "A-NonSchengen-BH": {
+        "0.5-40": { "1-14": 1239, "15-21": 1291, "22-28": 1446, "29-35": 1783, "36-47": 2042, "48-60": 2402, "61-75": 2970, "76-90": 3550, "91-120": 6003, "121-147": 7230, "148-180": 10046 },
+        "41-50":  { "1-14": 1860, "15-21": 1983, "22-28": 2213, "29-35": 2673, "36-47": 3063, "48-60": 3629, "61-75": 4480, "76-90": 5311 },
+        "51-65":  { "1-14": 2499, "15-21": 2664, "22-28": 2976, "29-35": 3592, "36-47": 4119, "48-60": 4879, "61-75": 6022, "76-90": 7140 },
+        "66-70":  { "1-14": 8131, "15-21": 8668, "22-28": 9678, "29-35": 11692, "36-47": 13402, "48-60": 15873, "61-75": 19598, "76-90": 23232 },
+        "71-75":  { "1-14": 14230, "15-21": 15169, "22-28": 16937, "29-35": 20462, "36-47": 23454, "48-60": 27779, "61-75": 34297, "76-90": 40657 },
+        "76-79":  { "1-14": 28460, "15-21": 30338, "22-28": 33873, "29-35": 40924, "36-47": 46908, "48-60": 55558, "61-75": 68592, "76-90": 81312 },
+        "80-85":  { "1-14": 40457, "15-21": 43339, "22-28": 48390, "29-35": 58024, "36-47": 66908, "48-60": 75558, "61-75": 86812 }
+      },
+
+      /* ------------------ PLAN B — SCHENGEN — BUSINESS & HOLIDAY ------------------ */
+      "B-Schengen-BH": {
+        "0.5-40": { "1-14": 2837, "15-21": 3013, "22-28": 3406, "29-35": 4090, "36-47": 4877, "48-60": 7856, "61-75": 11296, "76-90": 13593, "91-120": 19150, "121-147": 25428, "148-180": 33674 },
+        "41-50":  { "1-14": 5250, "15-21": 5623, "22-28": 6516, "29-35": 7687, "36-47": 9372, "48-60": 15228, "61-75": 22022, "76-90": 26473 },
+        "51-65":  { "1-14": 6664, "15-21": 7140, "22-28": 8272, "29-35": 9760, "36-47": 11900, "48-60": 19338, "61-75": 27966, "76-90": 33618 },
+        "66-70":  { "1-14": 21686, "15-21": 23233, "22-28": 26914, "29-35": 31754, "36-47": 38722, "48-60": 62923, "61-75": 90994, "76-90": 109390 },
+        "71-75":  { "1-14": 37960, "15-21": 40659, "22-28": 47100, "29-35": 55570, "36-47": 67763, "48-60": 110117, "61-75": 159240, "76-90": 191431 },
+        "76-79":  { "1-14": 75899, "15-21": 81318, "22-28": 94200, "29-35": 111139, "36-47": 135528, "48-60": 220233, "61-75": 318480, "76-90": 382863 },
+        "80-85":  { "1-14": 108427, "15-21": 116168, "22-28": 134571, "29-35": 158769, "36-47": 193611, "48-60": 314619, "61-75": 318480 }
+      },
+
+      /* ------------------ PLAN B — NON-SCHENGEN — BUSINESS & HOLIDAY ------------------ */
+      "B-NonSchengen-BH": {
+        "0.5-40": { "1-14": 2269, "15-21": 2411, "22-28": 2724, "29-35": 3271, "36-47": 3901, "48-60": 6284, "61-75": 9037, "76-90": 10874, "91-120": 15320, "121-147": 20341, "148-180": 26939 },
+        "41-50":  { "1-14": 4200, "15-21": 4499, "22-28": 5212, "29-35": 6149, "36-47": 7497, "48-60": 12182, "61-75": 17910, "76-90": 21178 },
+        "51-65":  { "1-14": 5331, "15-21": 5712, "22-28": 6618, "29-35": 7808, "36-47": 9520, "48-60": 15470, "61-75": 22371, "76-90": 26894 },
+        "66-70":  { "1-14": 17349, "15-21": 18587, "22-28": 21531, "29-35": 25402, "36-47": 30977, "48-60": 50339, "61-75": 72796, "76-90": 87511 },
+        "71-75":  { "1-14": 30360, "15-21": 32526, "22-28": 37679, "29-35": 44454, "36-47": 54210, "48-60": 88093, "61-75": 127392, "76-90": 153146 },
+        "76-79":  { "1-14": 60720, "15-21": 65052, "22-28": 75358, "29-35": 88910, "36-47": 108420, "48-60": 176187, "61-75": 254784, "76-90": 306291 },
+        "80-85":  { "1-14": 86742, "15-21": 92931, "22-28": 111304, "29-35": 127013, "36-47": 154886, "48-60": 251694 }
+      },
+
+      /* ------------------ PLAN C — NON-SCHENGEN — STUDY (1-12 months) ------------------ */
+      "C-NonSchengen-ST": {
+        "0.5-40": {
+          "1month": 2675, "6month": 16049, "7month": 18724, "8month": 21399, "9month": 24074, "10month": 26749, "11month": 29424, "12month": 32099
+        },
+        "41-59": {
+          "1month": 2140, "6month": 12841, "7month": 14981, "8month": 17121, "9month": 19261, "10month": 21402, "11month": 23542, "12month": 25682
+        }
+      },
+
+      /* ------------------ PLAN D — NON-SCHENGEN — STUDY (1-12 months) ------------------ */
+      "D-NonSchengen-ST": {
+        "0.5-40": {
+          "1month": 2140, "6month": 12841, "7month": 14981, "8month": 17121, "9month": 19261, "10month": 21402, "11month": 23542, "12month": 25682
+        },
+        "41-59": {
+          "1month": 2600, "6month": 19389, "7month": 22621, "8month": 25852, "9month": 29084, "10month": 32315, "11month": 35547, "12month": 38778
+        }
+      },
+
+      /* ------------------ PLAN C & D — SCHENGEN — STUDY (mirrored where PDF gives same numbers) ------------------ */
+      "C-Schengen-ST": {
+        "0.5-40": {
+          "1month": 2675, "6month": 16049, "7month": 18724, "8month": 21399, "9month": 24074, "10month": 26749, "11month": 29424, "12month": 32099
+        },
+        "41-59": {
+          "1month": 2140, "6month": 12841, "7month": 14981, "8month": 17121, "9month": 19261, "10month": 21402, "11month": 23542, "12month": 25682
+        }
+      },
+
+      "D-Schengen-ST": {
+        "0.5-40": {
+          "1month": 2140, "6month": 12841, "7month": 14981, "8month": 17121, "9month": 19261, "10month": 21402, "11month": 23542, "12month": 25682
+        },
+        "41-59": {
+          "1month": 2600, "6month": 19389, "7month": 22621, "8month": 25852, "9month": 29084, "10month": 32315, "11month": 35547, "12month": 38778
+        }
+      }
+    };
+
+    // ---------- helpers ----------
+    let calculatedAge = 0;
+    function calculateAge(){
+      const dob = document.getElementById("dob").value;
+      if(!dob){
+        calculatedAge = 0;
+        document.getElementById("ageDisplay").textContent = `Your Age: —`;
+        return;
+      }
+      const bd = new Date(dob);
+      const t = new Date();
+      let age = t.getFullYear() - bd.getFullYear();
+      const m = t.getMonth() - bd.getMonth();
+      if (m < 0 || (m === 0 && t.getDate() < bd.getDate())) age--;
+      calculatedAge = age;
+      document.getElementById("ageDisplay").textContent = `Your Age: ${age} years`;
+    }
+
+    function isSchengenCountry(name){
+      const sch = ["France","Germany","Italy","Spain","Netherlands","Switzerland","Austria","Belgium","Norway","Sweden","Denmark","Finland","Portugal","Greece"];
+      return sch.includes(name);
+    }
+
+    function ageBandFromAge(age, isStudy=false){
+      if(isStudy){
+        return (age <= 40) ? "0.5-40" : "41-59";
+      } else {
+        if (age <= 40) return "0.5-40";
+        if (age <= 50) return "41-50";
+        if (age <= 65) return "51-65";
+        if (age <= 70) return "66-70";
+        if (age <= 75) return "71-75";
+        if (age <= 79) return "76-79";
+        return "80-85";
+      }
+    }
+
+    function durationBandForDays(days){
+      if (days <= 14) return "1-14";
+      if (days <= 21) return "15-21";
+      if (days <= 28) return "22-28";
+      if (days <= 35) return "29-35";
+      if (days <= 47) return "36-47";
+      if (days <= 60) return "48-60";
+      if (days <= 75) return "61-75";
+      if (days <= 90) return "76-90";
+      if (days <= 120) return "91-120";
+      if (days <= 147) return "121-147";
+      if (days <= 180) return "148-180";
+      return null;
+    }
+
+    function monthBandFromDays(days){
+      if (days <= 31) return "1month";
+      if (days <= 31*6) return "6month";
+      if (days <= 31*7) return "7month";
+      if (days <= 31*8) return "8month";
+      if (days <= 31*9) return "9month";
+      if (days <= 31*10) return "10month";
+      if (days <= 31*11) return "11month";
+      return "12month";
+    }
+
+    // ---------- main calculation ----------
+    function calculatePrice(){
+      const daysVal = document.getElementById("days").value;
+      const days = daysVal ? parseInt(daysVal,10) : 0;
+      const country = document.getElementById("country").value;
+      const subType = document.getElementById("sub_type_id").value;
+      const adminPct = parseFloat(document.getElementById("adminPct").value) || 0;
+      const multiplier = parseFloat(document.getElementById("multiplier").value) || 1;
+      const resultBox = document.getElementById("resultBox");
+
+      if (!calculatedAge || !country || !days || !subType){
+        alert("Please fill Date of Birth, Destination, Duration and Type.");
+        return;
+      }
+
+      // Determine plan letter and region
+      let plan = null;
+      let region = null;
+      let typeKey = null;
+
+      // Map subtype selection
+      if (subType === "10"){ // Business & Holiday
+        typeKey = "BH";
+        if (country === "WorldInclUSCA" || country === "United States" || country === "Canada" || country === "WorldInclUSCA_NonSch") plan = "B";
+        else plan = "A";
+        if (country === "WorldExclUSCA" || country === "WorldInclUSCA") region = "Schengen";
+        else if (country === "WorldExclUSCA_NonSch" || country === "WorldInclUSCA_NonSch") region = "NonSchengen";
+        else region = isSchengenCountry(country) ? "Schengen" : "NonSchengen";
+      } else if (subType === "13"){ // Study
+        typeKey = "ST";
+        if (country === "WorldInclUSCA" || country === "United States" || country === "Canada" || country === "WorldInclUSCA_NonSch") plan = "D";
+        else plan = "C";
+        if (country === "WorldExclUSCA" || country === "WorldInclUSCA") region = "Schengen";
+        else if (country === "WorldExclUSCA_NonSch" || country === "WorldInclUSCA_NonSch") region = "NonSchengen";
+        else region = isSchengenCountry(country) ? "Schengen" : "NonSchengen";
+      } else {
+        resultBox.style.display = "block";
+        resultBox.innerHTML = "Unknown type selected.";
+        return;
+      }
+
+      const planKey = `${plan}-${region}-${typeKey}`;
+      const isStudy = (typeKey === "ST");
+      const ageBand = ageBandFromAge(calculatedAge, isStudy);
+
+      const planRates = rates[planKey];
+      if (!planRates){
+        resultBox.style.display = "block";
+        resultBox.innerHTML = `No rate table found for selection (${planKey}).`;
+        return;
+      }
+
+      let netPremium = null;
+      if (!isStudy){
+        const durationBand = durationBandForDays(days);
+        if (!durationBand){
+          resultBox.style.display = "block";
+          resultBox.innerHTML = `Duration ${days} days is outside supported day ranges (use <=180 days for BH or choose Study for month-based coverage).`;
+          return;
+        }
+        const ageRow = planRates[ageBand] || planRates[Object.keys(planRates)[0]];
+        if (ageRow && (ageRow[durationBand] !== undefined)){
+          netPremium = ageRow[durationBand];
+        } else {
+          // try fallback search for any matching duration across rows
+          for (let k of Object.keys(planRates)){
+            if (planRates[k] && planRates[k][durationBand] !== undefined){
+              netPremium = planRates[k][durationBand];
+              break;
+            }
+          }
+        }
+      } else {
+        const monthBand = monthBandFromDays(days);
+        const ageRow = planRates[ageBand] || planRates[Object.keys(planRates)[0]];
+        if (ageRow && ageRow[monthBand] !== undefined){
+          netPremium = ageRow[monthBand];
+        } else {
+          for (let k of Object.keys(planRates)){
+            if (planRates[k] && planRates[k][monthBand] !== undefined){
+              netPremium = planRates[k][monthBand];
+              break;
+            }
+          }
+        }
+      }
+
+      if (netPremium === null || netPremium === undefined){
+        resultBox.style.display = "block";
+        resultBox.innerHTML = `No rate available for Plan ${plan}, Region ${region}, Age band ${ageBand} for the selected duration.`;
+        return;
+      }
+
+      // Calculation flow: Net -> VAT (15%) -> Gross -> Admin -> Final
+      const vatRate = 0.15;
+      const vatAmount = round2(netPremium * vatRate);
+      const grossPremium = round2(netPremium + vatAmount);
+      const adminFee = round2(grossPremium * (adminPct / 100));
+      const beforeMultiplier = round2(grossPremium + adminFee);
+      const finalPayable = round2(beforeMultiplier * multiplier);
+
+      // Display with lettered steps A-E
+      resultBox.style.display = "block";
+      resultBox.innerHTML = `
+        <div class="breakdown">
+          <div><strong>Plan:</strong> ${plan} — ${region} — ${isStudy ? "Study (Student)" : "Business & Holiday"}</div>
+          <div><strong>Age:</strong> ${calculatedAge} yrs → Age Band: ${ageBand}</div>
+          <div><strong>Duration:</strong> ${days} days ${isStudy ? `(month band: ${monthBandFromDays(days)})` : `(day band: ${durationBandForDays(days)})`}</div>
+          <hr class="sep">
+          <div><strong>A.</strong> Net Premium: ৳ ${numberWithCommas(netPremium)}</div>
+          <div><strong>B.</strong> VAT (15%): ৳ ${numberWithCommas(vatAmount)}</div>
+          <div><strong>C.</strong> Gross Premium (A + B): ৳ ${numberWithCommas(grossPremium)}</div>
+          <div><strong>D.</strong> Admin Fee (${adminPct}% of Gross): ৳ ${numberWithCommas(adminFee)}</div>
+          <div><strong>E.</strong> Final Payable (after Multiplier ${multiplier}): ৳ ${numberWithCommas(finalPayable)}</div>
+          <hr class="sep">
+          <div class="small">Notes: Net & VAT values come from SafeCare rate chart. VAT is applied at 15%.</div>
+        </div>
+      `;
+    }
+
+    function round2(v){ return Math.round((v + Number.EPSILON) * 100) / 100; }
+    function numberWithCommas(x){ return (typeof x === "number") ? x.toLocaleString(undefined, {minimumFractionDigits: (x%1?2:0), maximumFractionDigits:2}) : x; }
+
+    function resetForm(){
+      document.getElementById("sub_type_id").value = "";
+      document.getElementById("country").value = "";
+      document.getElementById("dob").value = "";
+      document.getElementById("days").value = "";
+      document.getElementById("adminPct").value = "0";
+      document.getElementById("multiplier").value = "1";
+      document.getElementById("ageDisplay").textContent = "Your Age: —";
+      document.getElementById("resultBox").style.display = "none";
+      document.getElementById("resultBox").innerHTML = "";
+      calculatedAge = 0;
+    }
+  </script>
+</body>
+</html>
