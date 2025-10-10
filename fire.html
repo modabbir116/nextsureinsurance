@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Fire Insurance - NextSure</title>
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/product.css">
 </head>
 <body>
 
@@ -15,20 +15,20 @@
 
   <!-- Header -->
   <header class="site-header">
-    <div class="container header-inner">
+    <div class="header-inner">
       <a href="index.html" class="brand">NextSure</a>
       <button class="nav-toggle" id="navToggle"><span class="hamburger"></span></button>
       <nav class="nav" id="mainNav">
         <ul class="nav-list">
-          <li><a href="index.html#hero">Home</a></li>
+          <li><a href="index.html">Home</a></li>
           <li><a href="index.html#about">About</a></li>
           <li class="has-submenu">
-            <a href="#">Products ▾</a>
+            <a href="#products">Products</a>
             <ul class="submenu">
-              <li><a href="travel.html">Travel</a></li>
-              <li><a href="fire.html">Fire</a></li>
-              <li><a href="car.html">Car</a></li>
-              <li><a href="marine.html">Marine</a></li>
+              <li><a href="travel.html">Travel Insurance</a></li>
+              <li><a href="fire.html">Fire Insurance</a></li>
+              <li><a href="car.html">Car Insurance</a></li>
+              <li><a href="marine.html">Marine Insurance</a></li>
             </ul>
           </li>
           <li><a href="index.html#partners">Partners</a></li>
@@ -40,7 +40,7 @@
 
   <!-- Hero Banner -->
   <section class="hero">
-    <img src="assets/images/banner2.jpg" alt="Fire Insurance Banner">
+    <img src="images/fire.webp" alt="Fire Insurance Banner">
   </section>
 
   <!-- Product Details -->
@@ -52,17 +52,28 @@
       <div class="grid cards">
         <div class="card">
           <h3>Basic Fire Plan</h3>
-          <p>Coverage: Up to $50,000</p>
-          <p>Includes: Fire & lightning damage</p>
-          <p>Price: $50 / year</p>
+          <p><strong>Coverage:</strong> Up to $50,000</p>
+          <p><strong>Includes:</strong> Fire & lightning damage</p>
+          <p><strong>Deductible:</strong> $500</p>
+          <p><strong>Price:</strong> $50 / year</p>
           <button class="btn">Get Quote</button>
         </div>
 
         <div class="card">
           <h3>Premium Fire Plan</h3>
-          <p>Coverage: Up to $150,000</p>
-          <p>Includes: Fire, lightning, explosions, natural disasters</p>
-          <p>Price: $120 / year</p>
+          <p><strong>Coverage:</strong> Up to $150,000</p>
+          <p><strong>Includes:</strong> Fire, lightning, explosions, natural disasters</p>
+          <p><strong>Deductible:</strong> $1,000</p>
+          <p><strong>Price:</strong> $120 / year</p>
+          <button class="btn">Get Quote</button>
+        </div>
+
+        <div class="card">
+          <h3>Comprehensive Fire Plan</h3>
+          <p><strong>Coverage:</strong> Up to $500,000</p>
+          <p><strong>Includes:</strong> All fire risks + business interruption</p>
+          <p><strong>Deductible:</strong> $2,500</p>
+          <p><strong>Price:</strong> $350 / year</p>
           <button class="btn">Get Quote</button>
         </div>
       </div>
@@ -73,11 +84,13 @@
   <section class="section quote">
     <div class="container">
       <h2>Request a Fire Insurance Quote</h2>
-      <form id="contactForm" class="quote-form" action="#">
-        <input type="text" name="name" placeholder="Full Name" required>
-        <input type="email" name="email" placeholder="Email Address" required>
-        <textarea name="message" placeholder="Additional Information"></textarea>
-        <button type="submit" class="btn">Submit</button>
+      <form id="contactForm" class="quote-form">
+        <input type="text" name="name" placeholder="Full Name *" required>
+        <input type="email" name="email" placeholder="Email Address *" required>
+        <input type="text" name="property-type" placeholder="Property Type (Home/Business)">
+        <input type="text" name="property-value" placeholder="Estimated Property Value">
+        <textarea name="message" placeholder="Additional Information (Optional)"></textarea>
+        <button type="submit" class="btn">Submit Request</button>
         <div id="formMsg" class="form-msg"></div>
       </form>
     </div>
@@ -86,7 +99,7 @@
   <!-- Footer -->
   <footer class="site-footer">
     <div class="container footer-inner">
-      <p>© <span id="year"></span> NextSure. All rights reserved.</p>
+      <p>&copy; <span id="year"></span> NextSure. All rights reserved.</p>
     </div>
   </footer>
 

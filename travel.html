@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Travel Insurance - NextSure</title>
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/product.css">
 </head>
 <body>
 
@@ -15,15 +15,15 @@
 
   <!-- Header -->
   <header class="site-header">
-    <div class="container header-inner">
+    <div class="header-inner">
       <a href="index.html" class="brand">NextSure</a>
       <button class="nav-toggle" id="navToggle"><span class="hamburger"></span></button>
       <nav class="nav" id="mainNav">
         <ul class="nav-list">
-          <li><a href="index.html#hero">Home</a></li>
+          <li><a href="index.html">Home</a></li>
           <li><a href="index.html#about">About</a></li>
           <li class="has-submenu">
-            <a href="#">Products ▾</a>
+            <a href="#products">Products</a>
             <ul class="submenu">
               <li><a href="travel.html">Travel Insurance</a></li>
               <li><a href="fire.html">Fire Insurance</a></li>
@@ -40,7 +40,7 @@
 
   <!-- Hero Banner -->
   <section class="hero">
-    <img src="images/banner.jpg" alt="Travel Insurance Banner">
+    <img src="images/travel.webp" alt="Travel Insurance Banner">
   </section>
 
   <!-- Product Details -->
@@ -51,21 +51,46 @@
 
       <div class="grid cards">
         <div class="card">
-          <a href="travelInsurancPrice.html" class="btn">Buy Now</a>
+          <h3>Basic Travel Plan</h3>
+          <p><strong>Coverage:</strong> Up to $50,000</p>
+          <p><strong>Includes:</strong> Medical emergencies, baggage loss</p>
+          <p><strong>Duration:</strong> Up to 30 days</p>
+          <p><strong>Price:</strong> $75 / trip</p>
+          <a href="#" class="btn">Get Quote</a>
+        </div>
+
+        <div class="card">
+          <h3>Premium Travel Plan</h3>
+          <p><strong>Coverage:</strong> Up to $150,000</p>
+          <p><strong>Includes:</strong> Medical, trip cancellation, baggage, delays</p>
+          <p><strong>Duration:</strong> Up to 90 days</p>
+          <p><strong>Price:</strong> $180 / trip</p>
+          <a href="#" class="btn">Get Quote</a>
+        </div>
+
+        <div class="card">
+          <h3>Annual Multi-Trip</h3>
+          <p><strong>Coverage:</strong> Up to $100,000</p>
+          <p><strong>Includes:</strong> Unlimited trips throughout the year</p>
+          <p><strong>Duration:</strong> 365 days</p>
+          <p><strong>Price:</strong> $350 / year</p>
+          <a href="#" class="btn">Get Quote</a>
         </div>
       </div>
     </div>
   </section>
 
   <!-- CTA / Request Quote -->
-  <section class="section quote frome_data">
+  <section class="section quote">
     <div class="container">
-      <h2>Request a Travel Quote</h2>
-      <form id="contactForm" class="quote-form" action="#">
-        <input type="text" name="name" placeholder="Full Name" required class="input_data">
-        <input type="email" name="email" placeholder="Email Address" required class="input_data">
-        <textarea name="message" placeholder="Additional Information" class="input_data"></textarea>
-        <button type="submit" class="btn">Submit</button>
+      <h2>Request a Travel Insurance Quote</h2>
+      <form id="contactForm" class="quote-form">
+        <input type="text" name="name" placeholder="Full Name *" required>
+        <input type="email" name="email" placeholder="Email Address *" required>
+        <input type="text" name="destination" placeholder="Travel Destination">
+        <input type="date" name="travel-date" placeholder="Travel Date">
+        <textarea name="message" placeholder="Additional Information (Optional)"></textarea>
+        <button type="submit" class="btn">Submit Request</button>
         <div id="formMsg" class="form-msg"></div>
       </form>
     </div>
@@ -74,7 +99,7 @@
   <!-- Footer -->
   <footer class="site-footer">
     <div class="container footer-inner">
-      <p>© <span id="year"></span> NextSure. All rights reserved.</p>
+      <p>&copy; <span id="year"></span> NextSure. All rights reserved.</p>
     </div>
   </footer>
 

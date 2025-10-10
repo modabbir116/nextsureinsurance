@@ -3,35 +3,28 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NextSure Insurance</title>
+  <title>NextSure - Insurance Solutions</title>
   <link rel="stylesheet" href="css/style.css">
-  <meta name="theme-color" content="#2c246d">
 </head>
 <body>
-
+  
   <!-- Preloader -->
-  <div id="preloader" class="preloader">
+  <div class="preloader" id="preloader">
     <div class="loader"></div>
   </div>
 
-  <!-- Header / Navbar -->
+  <!-- Header -->
   <header class="site-header">
-    <div class="container header-inner">
-      <a href="index.html" class="brand">
-        <img src="assets/images/logo.png" alt="NextSure Logo" class="logo" onerror="this.style.display='none'">
-        <span class="brand-text">NextSure</span>
+    <div class="header-inner">
+      <a href="#" class="brand">
+        <span>NextSure</span>
       </a>
-
-      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
-        <span class="hamburger"></span>
-      </button>
-
       <nav class="nav" id="mainNav">
         <ul class="nav-list">
-          <li><a href="#hero">Home</a></li>
+          <li><a href="index.html">Home</a></li>
           <li><a href="#about">About</a></li>
           <li class="has-submenu">
-            <a href="#products" class="submenu-toggle">Products ▾</a>
+            <a href="#products">Products</a>
             <ul class="submenu">
               <li><a href="travel.html">Travel Insurance</a></li>
               <li><a href="fire.html">Fire Insurance</a></li>
@@ -44,141 +37,154 @@
           <li><a href="#quote" class="cta">Get a Quote</a></li>
         </ul>
       </nav>
+      <button class="nav-toggle" id="navToggle">
+        <span class="hamburger"></span>
+      </button>
     </div>
   </header>
 
-  <!-- Hero / Slider -->
-  <section class="hero" id="hero">
-    <div class="container">
-      <div class="slider" id="heroSlider">
-        <!-- Slides will be injected from JS -->
-      </div>
-      <div class="slider-controls">
-        <button id="prevSlide" aria-label="Previous">◀</button>
-        <div id="dots" class="dots"></div>
-        <button id="nextSlide" aria-label="Next">▶</button>
-      </div>
+  <!-- Hero Slider -->
+  <section class="hero" id="home">
+    <div class="slider" id="heroSlider">
+      <!-- Slides will be dynamically inserted here -->
+    </div>
+    <div class="slider-controls">
+      <button id="prevSlide">↑</button>
+      <div class="dots" id="dots"></div>
+      <button id="nextSlide">↓</button>
     </div>
   </section>
 
   <!-- Products Section -->
-  <section id="products" class="section products">
-    <div class="container">
-      <h2 class="section-title">Our Products</h2>
-      <p class="lead">Choose coverage that fits your life.</p>
-      <div class="grid cards">
-        <article class="card product-card" data-target="travel.html">
-          <h3>Travel Insurance</h3>
-          <p>Medical, delay, baggage loss and emergency assistance.</p>
-          <button class="btn btn-link go-product" data-target="travel.html">View Travel →</button>
-        </article>
-
-        <article class="card product-card" data-target="fire.html">
-          <h3>Fire Insurance</h3>
-          <p>Protection against fire and related damages.</p>
-          <button class="btn btn-link go-product" data-target="fire.html">View Fire →</button>
-        </article>
-
-        <article class="card product-card" data-target="car.html">
-          <h3>Car Insurance</h3>
-          <p>Third-party & comprehensive car policies.</p>
-          <button class="btn btn-link go-product" data-target="car.html">View Car →</button>
-        </article>
-
-        <article class="card product-card" data-target="marine.html">
-          <h3>Marine Insurance</h3>
-          <p>Cover for cargo, hull and marine liabilities.</p>
-          <button class="btn btn-link go-product" data-target="marine.html">View Marine →</button>
-        </article>
+  <section class="section" id="products">
+    <h2 class="section-title">Our Products</h2>
+    <p class="lead">Choose coverage that fits your life.</p>
+    
+    <div class="grid cards">
+      <div class="card">
+        <h3>Travel Insurance</h3>
+        <p>Medical, delay, baggage loss and emergency assistance.</p>
+        <a href="#" class="btn-link">View Travel →</a>
+      </div>
+      
+      <div class="card">
+        <h3>Fire Insurance</h3>
+        <p>Protection against fire and related damages.</p>
+        <a href="#" class="btn-link">View Fire →</a>
+      </div>
+      
+      <div class="card">
+        <h3>Car Insurance</h3>
+        <p>Third-party & comprehensive car policies.</p>
+        <a href="#" class="btn-link">View Car →</a>
+      </div>
+      
+      <div class="card">
+        <h3>Marine Insurance</h3>
+        <p>Cover for cargo, hull and marine liabilities.</p>
+        <a href="#" class="btn-link">View Marine →</a>
       </div>
     </div>
   </section>
 
-  <!-- Why Choose NextSure -->
-  <section id="about" class="section about">
-    <div class="container about-grid">
-      <div class="about-text">
-        <h2>Why Choose NextSure</h2>
-        <p>Fast claims, friendly support, tailored plans, and transparent pricing.</p>
-        <ul class="benefits">
-          <li>24/7 customer support</li>
-          <li>Easy online claim process</li>
-          <li>Flexible plans & add-ons</li>
-        </ul>
+  <!-- Why Choose Section -->
+  <section class="why-choose">
+    <div class="container">
+      <h2>Why Choose NextSure</h2>
+      <ul>
+        <li>Fast claims, friendly support, tailored plans, and transparent pricing.</li>
+        <li>24/7 customer support available for all your queries.</li>
+        <li>Easy online claim process with quick settlements.</li>
+        <li>Flexible plans & add-ons to suit your needs.</li>
+        <li>Trusted by thousands of satisfied customers.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Partners Section -->
+  <section class="partners-section" id="partners">
+    <h2 class="section-title">Our Insurance Partners</h2>
+    <p class="lead">Working with leading insurance companies.</p>
+    
+    <div class="partners-grid">
+      <div class="partner">
+        <img src="https://via.placeholder.com/150x60?text=Partner+1" alt="Partner 1">
       </div>
-      <div class="about-image">
-        <img src="assets/images/about-illustration.png" alt="About illustration" onerror="this.style.display='none'">
+      <div class="partner">
+        <img src="https://via.placeholder.com/150x60?text=Partner+2" alt="Partner 2">
+      </div>
+      <div class="partner">
+        <img src="https://via.placeholder.com/150x60?text=Partner+3" alt="Partner 3">
+      </div>
+      <div class="partner">
+        <img src="https://via.placeholder.com/150x60?text=Partner+4" alt="Partner 4">
+      </div>
+      <div class="partner">
+        <img src="https://via.placeholder.com/150x60?text=Partner+5" alt="Partner 5">
+      </div>
+      <div class="partner">
+        <img src="https://via.placeholder.com/150x60?text=Partner+6" alt="Partner 6">
       </div>
     </div>
   </section>
 
-  <!-- Partners -->
-  <section id="partners" class="section partners">
-    <div class="container">
-      <h2 class="section-title">Our Insurance Partners</h2>
-      <div class="partners-grid">
-        <div class="partner"><img src="assets/images/partners/bnic.png" alt="BNIC" onerror="this.style.display='none'"></div>
-        <div class="partner"><img src="assets/images/partners/miiplc.png" alt="MIIPLC" onerror="this.style.display='none'"></div>
-        <div class="partner"><img src="assets/images/partners/prime.png" alt="Prime" onerror="this.style.display='none'"></div>
-        <div class="partner"><img src="assets/images/partners/greendelta.png" alt="Green Delta" onerror="this.style.display='none'"></div>
-        <div class="partner"><img src="assets/images/partners/provati.png" alt="Provati" onerror="this.style.display='none'"></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact / Quote -->
-  <section id="quote" class="section quote">
-    <div class="container">
-      <div class="quote-inner">
-        <div class="quote-left">
-          <h2>Get a Free Quote</h2>
-          <p>Tell us a bit about what you need and we'll get back with a tailored premium.</p>
+  <!-- Quote Section -->
+  <section class="quote-section" id="quote">
+    <div class="quote-form">
+      <h2>Get a Free Quote</h2>
+      <p>Tell us a bit about what you need and we'll get back with a tailored premium.</p>
+      
+      <div id="formMsg"></div>
+      
+      <form id="contactForm">
+        <div class="form-group">
+          <label for="name">Full Name *</label>
+          <input type="text" id="name" name="name" placeholder="Enter your name" required>
         </div>
-
-        <form id="contactForm" class="quote-form" action="#" novalidate>
-          <div class="form-row">
-            <input type="text" name="name" id="name" placeholder="Full name" required>
-          </div>
-          <div class="form-row">
-            <input type="email" name="email" id="email" placeholder="Email address" required>
-          </div>
-          <div class="form-row">
-            <select name="product" id="productSelect">
-              <option value="travel">Travel Insurance</option>
-              <option value="fire">Fire Insurance</option>
-              <option value="car">Car Insurance</option>
-              <option value="marine">Marine Insurance</option>
-            </select>
-          </div>
-          <div class="form-row">
-            <textarea name="message" id="message" placeholder="Tell us more (optional)"></textarea>
-          </div>
-          <div class="form-row">
-            <button type="submit" class="btn">Request Quote</button>
-            <div id="formMsg" class="form-msg" aria-live="polite"></div>
-          </div>
-        </form>
-      </div>
+        
+        <div class="form-group">
+          <label for="email">Email Address *</label>
+          <input type="email" id="email" name="email" placeholder="your@email.com" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="insurance-type">Insurance Type</label>
+          <select id="insurance-type" name="insurance-type">
+            <option value="travel">Travel Insurance</option>
+            <option value="fire">Fire Insurance</option>
+            <option value="car">Car Insurance</option>
+            <option value="marine">Marine Insurance</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="message">Tell us more</label>
+          <textarea id="message" name="message" placeholder="Any specific requirements..."></textarea>
+        </div>
+        
+        <button type="submit" class="btn">Request Quote</button>
+      </form>
     </div>
   </section>
 
-  <!-- Contact Info -->
-  <section id="contact" class="section contact">
-    <div class="container contact-inner">
-      <h2>Contact Us</h2>
-      <p>Phone: +880 1700-123456 | Email: info@nextsure.xyz | Address: House 12, Road 4, Dhanmondi, Dhaka, Bangladesh</p>
+  <!-- Contact Section -->
+  <section class="contact-section" id="contact">
+    <h2>Contact Us</h2>
+    <div class="contact-info">
+      <p><strong>Phone:</strong> +880 1700-123456</p>
+      <p><strong>Email:</strong> <a href="mailto:info@nextsure.xyz">info@nextsure.xyz</a></p>
+      <p><strong>Address:</strong> House 12, Road 4, Dhanmondi, Dhaka, Bangladesh</p>
     </div>
   </section>
-
-  <button id="backTop" class="back-top" aria-label="Back to top">↑</button>
 
   <!-- Footer -->
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <p>© <span id="year"></span> NextSure. All rights reserved.</p>
-      <p class="small">Designed with ♥ using HTML, CSS & JS — Responsive 320px–1200px</p>
-    </div>
+  <footer>
+    <p>&copy; <span id="year"></span> NextSure. All rights reserved.</p>
+    <p>Designed with ♥ using HTML, CSS & JS — Responsive 320px-1920px.</p>
   </footer>
+
+  <!-- Back to Top Button -->
+  <button id="backTop">↑</button>
 
   <script src="js/main.js"></script>
 </body>
