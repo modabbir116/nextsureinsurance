@@ -109,15 +109,351 @@ class HeaderScroll {
 // ===========================
 // HERO SLIDER (ADVANCED)
 // ===========================
+// class HeroSlider {
+//   constructor() {
+//     this.slides = [
+//       {
+//         src: 'images/travel2.jpg',
+//         alt: 'Travel Insurance',
+//         title: 'Travel with Confidence',
+//         text: 'Explore the world safely with our comprehensive travel insurance.',
+//         btn: 'Learn More',
+//         link: '#products'
+//       },
+//       {
+//         src: 'images/fire.webp',
+//         alt: 'Fire Insurance',
+//         title: 'Fire Protection Plans',
+//         text: 'Protect your home and business from unexpected fire damage.',
+//         btn: 'View Details',
+//         link: '#products'
+//       },
+//       {
+//         src: 'images/car.jpg',
+//         alt: 'Car Insurance',
+//         title: 'Drive Without Worries',
+//         text: 'Enjoy every ride with full car insurance coverage.',
+//         btn: 'Get a Quote',
+//         link: '#quote'
+//       },
+//       {
+//         src: 'images/marine.webp',
+//         alt: 'Marine Insurance',
+//         title: 'Marine Cargo Protection',
+//         text: 'Ensure your cargo and vessel are always secure.',
+//         btn: 'Discover More',
+//         link: '#products'
+//       }
+//     ];
+
+//     this.slider = document.getElementById('heroSlider');
+//     this.dotsContainer = document.getElementById('dots');
+//     this.nextBtn = document.getElementById('nextSlide');
+//     this.prevBtn = document.getElementById('prevSlide');
+//     this.currentIndex = 0;
+//     this.autoPlayInterval = null;
+//     this.autoPlayDelay = 2000; // 🔥 ২ সেকেন্ড পর পর স্লাইড পরিবর্তন হবে
+//     this.isTransitioning = false;
+
+//     this.init();
+//   }
+
+//   init() {
+//     if (!this.slider || !this.dotsContainer) return;
+
+//     this.createSlides();
+//     this.createDots();
+//     this.attachEventListeners();
+//     this.startAutoPlay();
+//     this.showSlide(0);
+//   }
+
+//   createSlides() {
+//     this.slides.forEach((slide, index) => {
+//       const slideDiv = document.createElement('div');
+//       slideDiv.classList.add('slide');
+//       if (index === 0) slideDiv.classList.add('active');
+
+//       slideDiv.innerHTML = `
+//         <img src="${slide.src}" alt="${slide.alt}" loading="${index === 0 ? 'eager' : 'lazy'}">
+//         <div class="slide-content">
+//           <h1>${slide.title}</h1>
+//           <p>${slide.text}</p>
+//           <a href="${slide.link}">${slide.btn}</a>
+//         </div>
+//       `;
+//       this.slider.appendChild(slideDiv);
+//     });
+
+//     this.slideElements = this.slider.querySelectorAll('.slide');
+//   }
+
+//   createDots() {
+//     this.slides.forEach((_, index) => {
+//       const dot = document.createElement('span');
+//       dot.classList.add('dot');
+//       if (index === 0) dot.classList.add('active');
+//       dot.setAttribute('aria-label', `Slide ${index + 1}`);
+//       dot.setAttribute('role', 'button');
+//       dot.setAttribute('tabindex', '0');
+      
+//       dot.addEventListener('click', () => {
+//         this.goToSlide(index);
+//         this.resetAutoPlay();
+//       });
+
+//       dot.addEventListener('keypress', (e) => {
+//         if (e.key === 'Enter' || e.key === ' ') {
+//           e.preventDefault();
+//           this.goToSlide(index);
+//           this.resetAutoPlay();
+//         }
+//       });
+
+//       this.dotsContainer.appendChild(dot);
+//     });
+
+//     this.dotElements = this.dotsContainer.querySelectorAll('.dot');
+//   }
+
+//   showSlide(index) {
+//     if (this.isTransitioning) return;
+//     this.isTransitioning = true;
+
+//     // Remove active class from all
+//     this.slideElements.forEach(slide => slide.classList.remove('active'));
+//     this.dotElements.forEach(dot => dot.classList.remove('active'));
+
+//     // Add active class to current
+//     this.slideElements[index].classList.add('active');
+//     this.dotElements[index].classList.add('active');
+    
+//     this.currentIndex = index;
+
+//     setTimeout(() => {
+//       this.isTransitioning = false;
+//     }, 600);
+//   }
+
+//   goToSlide(index) {
+//     if (index === this.currentIndex) return;
+//     this.showSlide(index);
+//   }
+
+//   nextSlide() {
+//     const nextIndex = (this.currentIndex + 1) % this.slides.length;
+//     this.showSlide(nextIndex);
+//   }
+
+//   prevSlide() {
+//     const prevIndex = (this.currentIndex - 1 + this.slides.length) % this.slides.length;
+//     this.showSlide(prevIndex);
+//   }
+
+//   startAutoPlay() {
+//     this.autoPlayInterval = setInterval(() => {
+//       this.nextSlide();
+//     }, this.autoPlayDelay);
+//   }
+
+//   stopAutoPlay() {
+//     if (this.autoPlayInterval) {
+//       clearInterval(this.autoPlayInterval);
+//       this.autoPlayInterval = null;
+//     }
+//   }
+
+//   resetAutoPlay() {
+//     this.stopAutoPlay();
+//     this.startAutoPlay();
+//   }
+
+//   attachEventListeners() {
+//     // Button controls
+//     if (this.nextBtn) {
+//       this.nextBtn.addEventListener('click', () => {
+//         this.nextSlide();
+//         this.resetAutoPlay();
+//       });
+//     }
+    
+//     if (this.prevBtn) {
+//       this.prevBtn.addEventListener('click', () => {
+//         this.prevSlide();
+//         this.resetAutoPlay();
+//       });
+//     }
+
+//     // Pause on hover
+//     this.slider.addEventListener('mouseenter', () => this.stopAutoPlay());
+//     this.slider.addEventListener('mouseleave', () => this.startAutoPlay());
+
+//     // Keyboard navigation
+//     document.addEventListener('keydown', (e) => {
+//       if (e.key === 'ArrowLeft') {
+//         this.prevSlide();
+//         this.resetAutoPlay();
+//       } else if (e.key === 'ArrowRight') {
+//         this.nextSlide();
+//         this.resetAutoPlay();
+//       }
+//     });
+
+//     // Touch/Swipe support
+//     let touchStartX = 0;
+//     let touchEndX = 0;
+
+//     this.slider.addEventListener('touchstart', (e) => {
+//       touchStartX = e.changedTouches[0].screenX;
+//     }, { passive: true });
+
+//     this.slider.addEventListener('touchend', (e) => {
+//       touchEndX = e.changedTouches[0].screenX;
+//       this.handleSwipe(touchStartX, touchEndX);
+//     }, { passive: true });
+
+//     // Visibility change - pause when tab is hidden
+//     document.addEventListener('visibilitychange', () => {
+//       if (document.hidden) {
+//         this.stopAutoPlay();
+//       } else {
+//         this.startAutoPlay();
+//       }
+//     });
+//   }
+
+//   handleSwipe(startX, endX) {
+//     const swipeThreshold = 50;
+//     const diff = startX - endX;
+
+//     if (Math.abs(diff) > swipeThreshold) {
+//       if (diff > 0) {
+//         this.nextSlide();
+//       } else {
+//         this.prevSlide();
+//       }
+//       this.resetAutoPlay();
+//     }
+//   }
+// }
+// class HeroSlider {
+//   constructor() {
+//     this.slides = [
+//       {
+//         src: 'images/travel2.jpg',
+//         alt: 'Travel Insurance',
+//         title: 'Travel with Confidence',
+//         text: 'Explore the world safely with our comprehensive travel insurance.',
+//         btn: 'Learn More',
+//         link: '#products'
+//       },
+//       {
+//         src: 'images/fire.webp',
+//         alt: 'Fire Insurance',
+//         title: 'Fire Protection Plans',
+//         text: 'Protect your home and business from unexpected fire damage.',
+//         btn: 'View Details',
+//         link: '#products'
+//       },
+//       {
+//         src: 'images/car.jpg',
+//         alt: 'Car Insurance',
+//         title: 'Drive Without Worries',
+//         text: 'Enjoy every ride with full car insurance coverage.',
+//         btn: 'Get a Quote',
+//         link: '#quote'
+//       },
+//       {
+//         src: 'images/marine.webp',
+//         alt: 'Marine Insurance',
+//         title: 'Marine Cargo Protection',
+//         text: 'Ensure your cargo and vessel are always secure.',
+//         btn: 'Discover More',
+//         link: '#products'
+//       }
+//     ];
+
+//     this.slider = document.getElementById('heroSlider');
+//     this.dotsContainer = document.getElementById('dots');
+//     this.nextBtn = document.getElementById('nextSlide');
+//     this.prevBtn = document.getElementById('prevSlide');
+//     this.currentIndex = 0;
+//     this.autoPlayInterval = null;
+//     this.autoPlayDelay = 2000; // 🔥 প্রতি ২ সেকেন্ডে স্লাইড বদলাবে
+//     this.isTransitioning = false;
+
+//     this.init();
+//   }
+
+//   init() {
+//     if (!this.slider || !this.dotsContainer) return;
+
+//     this.createSlides();
+//     this.createDots();
+//     this.attachEventListeners();
+//     this.startAutoPlay();
+//     this.showSlide(0);
+//   }
+
+//   createSlides() {
+//     this.slides.forEach((slide, index) => {
+//       const slideDiv = document.createElement('div');
+//       slideDiv.classList.add('slide');
+//       if (index === 0) slideDiv.classList.add('active');
+
+//       slideDiv.innerHTML = `
+//         <img src="${slide.src}" alt="${slide.alt}">
+//         <div class="slide-content">
+//           <h1>${slide.title}</h1>
+//           <p>${slide.text}</p>
+//           <a href="${slide.link}">${slide.btn}</a>
+//         </div>
+//       `;
+//       this.slider.appendChild(slideDiv);
+//     });
+
+//     this.slideElements = this.slider.querySelectorAll('.slide');
+//   }
+
+//   createDots() {
+//     this.slides.forEach((_, index) => {
+//       const dot = document.createElement('span');
+//       dot.classList.add('dot');
+//       if (index === 0) dot.classList.add('active');
+//       dot.addEventListener('click', () => this.goToSlide(index));
+//       this.dotsContainer.appendChild(dot);
+//     });
+//     this.dotElements = this.dotsContainer.querySelectorAll('.dot');
+//   }
+
+//   showSlide(index) {
+//     this.slideElements.forEach(slide => slide.classList.remove('active'));
+//     this.dotElements.forEach(dot => dot.classList.remove('active'));
+
+//     this.slideElements[index].classList.add('active');
+//     this.dotElements[index].classList.add('active');
+
+//     this.currentIndex = index;
+//   }
+
+//   nextSlide() {
+//     const nextIndex = (this.currentIndex + 1) % this.slides.length;
+//     this.showSlide(nextIndex);
+//   }
+
+//   startAutoPlay() {
+//     this.autoPlayInterval = setInterval(() => this.nextSlide(), this.autoPlayDelay);
+//   }
+// }
 class HeroSlider {
   constructor() {
     this.slides = [
       {
-        src: 'images/travel.webp',
+        src: 'images/travel2.jpg',
         alt: 'Travel Insurance',
         title: 'Travel with Confidence',
         text: 'Explore the world safely with our comprehensive travel insurance.',
-        btn: 'Learn More',
+        btn: 'View Details',
         link: '#products'
       },
       {
@@ -133,7 +469,7 @@ class HeroSlider {
         alt: 'Car Insurance',
         title: 'Drive Without Worries',
         text: 'Enjoy every ride with full car insurance coverage.',
-        btn: 'Get a Quote',
+        btn: 'View Details',
         link: '#quote'
       },
       {
@@ -141,7 +477,7 @@ class HeroSlider {
         alt: 'Marine Insurance',
         title: 'Marine Cargo Protection',
         text: 'Ensure your cargo and vessel are always secure.',
-        btn: 'Discover More',
+        btn: 'View Details',
         link: '#products'
       }
     ];
@@ -152,190 +488,104 @@ class HeroSlider {
     this.prevBtn = document.getElementById('prevSlide');
     this.currentIndex = 0;
     this.autoPlayInterval = null;
-    this.autoPlayDelay = 6000;
-    this.isTransitioning = false;
+    this.autoPlayDelay = 3000; // প্রতি ২ সেকেন্ডে slide change
 
     this.init();
   }
 
   init() {
-    if (!this.slider || !this.dotsContainer) return;
+    // ✅ পুরনো slide ও dot মুছে ফেলবে
+    this.slider.innerHTML = "";
+    this.dotsContainer.innerHTML = "";
 
     this.createSlides();
     this.createDots();
-    this.attachEventListeners();
-    this.startAutoPlay();
     this.showSlide(0);
+    this.startAutoPlay();
+    this.attachEventListeners();
   }
 
   createSlides() {
     this.slides.forEach((slide, index) => {
-      const slideDiv = document.createElement('div');
-      slideDiv.classList.add('slide');
-      if (index === 0) slideDiv.classList.add('active');
+      const div = document.createElement('div');
+      div.classList.add('slide');
+      if (index === 0) div.classList.add('active');
 
-      slideDiv.innerHTML = `
-        <img src="${slide.src}" alt="${slide.alt}" loading="${index === 0 ? 'eager' : 'lazy'}">
+      div.innerHTML = `
+        <img src="${slide.src}" alt="${slide.alt}">
         <div class="slide-content">
           <h1>${slide.title}</h1>
           <p>${slide.text}</p>
-          <a href="${slide.link}">${slide.btn}</a>
+          <a href="${slide.link}" class="btn">${slide.btn}</a>
         </div>
       `;
-      this.slider.appendChild(slideDiv);
+      this.slider.appendChild(div);
     });
 
     this.slideElements = this.slider.querySelectorAll('.slide');
   }
 
   createDots() {
-    this.slides.forEach((_, index) => {
+    this.slides.forEach((_, i) => {
       const dot = document.createElement('span');
       dot.classList.add('dot');
-      if (index === 0) dot.classList.add('active');
-      dot.setAttribute('aria-label', `Slide ${index + 1}`);
-      dot.setAttribute('role', 'button');
-      dot.setAttribute('tabindex', '0');
-      
+      if (i === 0) dot.classList.add('active');
       dot.addEventListener('click', () => {
-        this.goToSlide(index);
+        this.showSlide(i);
         this.resetAutoPlay();
       });
-
-      dot.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          this.goToSlide(index);
-          this.resetAutoPlay();
-        }
-      });
-
       this.dotsContainer.appendChild(dot);
     });
-
     this.dotElements = this.dotsContainer.querySelectorAll('.dot');
   }
 
   showSlide(index) {
-    if (this.isTransitioning) return;
-    this.isTransitioning = true;
-
-    // Remove active class from all
     this.slideElements.forEach(slide => slide.classList.remove('active'));
     this.dotElements.forEach(dot => dot.classList.remove('active'));
 
-    // Add active class to current
     this.slideElements[index].classList.add('active');
     this.dotElements[index].classList.add('active');
-    
     this.currentIndex = index;
-
-    setTimeout(() => {
-      this.isTransitioning = false;
-    }, 600);
-  }
-
-  goToSlide(index) {
-    if (index === this.currentIndex) return;
-    this.showSlide(index);
   }
 
   nextSlide() {
-    const nextIndex = (this.currentIndex + 1) % this.slides.length;
-    this.showSlide(nextIndex);
+    const next = (this.currentIndex + 1) % this.slides.length;
+    this.showSlide(next);
   }
 
   prevSlide() {
-    const prevIndex = (this.currentIndex - 1 + this.slides.length) % this.slides.length;
-    this.showSlide(prevIndex);
+    const prev = (this.currentIndex - 1 + this.slides.length) % this.slides.length;
+    this.showSlide(prev);
   }
 
   startAutoPlay() {
-    this.autoPlayInterval = setInterval(() => {
-      this.nextSlide();
-    }, this.autoPlayDelay);
-  }
-
-  stopAutoPlay() {
-    if (this.autoPlayInterval) {
-      clearInterval(this.autoPlayInterval);
-      this.autoPlayInterval = null;
-    }
+    this.autoPlayInterval = setInterval(() => this.nextSlide(), this.autoPlayDelay);
   }
 
   resetAutoPlay() {
-    this.stopAutoPlay();
+    clearInterval(this.autoPlayInterval);
     this.startAutoPlay();
   }
 
   attachEventListeners() {
-    // Button controls
-    if (this.nextBtn) {
-      this.nextBtn.addEventListener('click', () => {
-        this.nextSlide();
-        this.resetAutoPlay();
-      });
-    }
-    
-    if (this.prevBtn) {
-      this.prevBtn.addEventListener('click', () => {
-        this.prevSlide();
-        this.resetAutoPlay();
-      });
-    }
-
-    // Pause on hover
-    this.slider.addEventListener('mouseenter', () => this.stopAutoPlay());
-    this.slider.addEventListener('mouseleave', () => this.startAutoPlay());
-
-    // Keyboard navigation
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowLeft') {
-        this.prevSlide();
-        this.resetAutoPlay();
-      } else if (e.key === 'ArrowRight') {
-        this.nextSlide();
-        this.resetAutoPlay();
-      }
-    });
-
-    // Touch/Swipe support
-    let touchStartX = 0;
-    let touchEndX = 0;
-
-    this.slider.addEventListener('touchstart', (e) => {
-      touchStartX = e.changedTouches[0].screenX;
-    }, { passive: true });
-
-    this.slider.addEventListener('touchend', (e) => {
-      touchEndX = e.changedTouches[0].screenX;
-      this.handleSwipe(touchStartX, touchEndX);
-    }, { passive: true });
-
-    // Visibility change - pause when tab is hidden
-    document.addEventListener('visibilitychange', () => {
-      if (document.hidden) {
-        this.stopAutoPlay();
-      } else {
-        this.startAutoPlay();
-      }
-    });
-  }
-
-  handleSwipe(startX, endX) {
-    const swipeThreshold = 50;
-    const diff = startX - endX;
-
-    if (Math.abs(diff) > swipeThreshold) {
-      if (diff > 0) {
-        this.nextSlide();
-      } else {
-        this.prevSlide();
-      }
+    this.nextBtn.addEventListener('click', () => {
+      this.nextSlide();
       this.resetAutoPlay();
-    }
+    });
+
+    this.prevBtn.addEventListener('click', () => {
+      this.prevSlide();
+      this.resetAutoPlay();
+    });
   }
 }
+
+document.addEventListener('DOMContentLoaded', () => new HeroSlider());
+
+
+
+// document.addEventListener('DOMContentLoaded', () => new HeroSlider());
+
 
 // ===========================
 // MOBILE NAVIGATION

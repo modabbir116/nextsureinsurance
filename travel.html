@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Travel Insurance - NextSure</title>
+  <link rel="stylesheet" href="css/travel.css">
   <link rel="stylesheet" href="css/product.css">
 </head>
 <body>
@@ -16,7 +17,11 @@
   <!-- Header -->
   <header class="site-header">
     <div class="header-inner">
-      <a href="index.html" class="brand">NextSure</a>
+      <div class="brand_logo">
+        <a href="index.html" class="brand">
+          <img src="./images/nextsurelogo.png" alt="logo">
+        </a>
+      </div>
       <button class="nav-toggle" id="navToggle"><span class="hamburger"></span></button>
       <nav class="nav" id="mainNav">
         <ul class="nav-list">
@@ -40,59 +45,137 @@
 
   <!-- Hero Banner -->
   <section class="hero">
-    <img src="images/travel.webp" alt="Travel Insurance Banner">
+    <img src="images/travel3.jpg" alt="Travel Insurance Banner">
   </section>
 
   <!-- Product Details -->
   <section class="section product-details">
     <div class="container">
       <h2>Travel Insurance</h2>
-      <p>Protect yourself from medical emergencies, trip cancellations, baggage loss, and more while traveling.</p>
+        <div class="insurance_detals">
+          <h3>🧾 NextSure — OMP Travel Insurance Calculator</h3>
+        <ul>
+          <li> 1. Business & Holiday Plan Up to 180 days Coverage: $50,000 (Worldwide) €30,000 (Schengen Countries) $100,000 (USA & Canada)</li>
+          <li> 2. Study Plan Duration: 1-12 months Coverage: $50,000 (€30,000 for Schengen)</li>
+          <li>  3. Employment Plan Duration: 1-12 months Coverage: $50,000 (€30,000 for Schengen) </li>
+          <li> 4. Corporate Frequent Travel (CFT) Duration: 1 year (max 30 days per trip) Coverage: $50,000 
+            (or €30,000 for Schengen). </li>
+          <li>    Customer Support Hotline: <a href="http://wa.me/8801851008300" target="_blank">+88 01851-008300 </a></li>
+        </ul>
+        <div class="buybutton">
+        <a href="OMP New Rate Chart.pdf" target="_blank">Travel Insurance OMP Rate</a>
 
-      <div class="grid cards">
-        <div class="card">
-          <h3>Basic Travel Plan</h3>
-          <p><strong>Coverage:</strong> Up to $50,000</p>
-          <p><strong>Includes:</strong> Medical emergencies, baggage loss</p>
-          <p><strong>Duration:</strong> Up to 30 days</p>
-          <p><strong>Price:</strong> $75 / trip</p>
-          <a href="#" class="btn">Get Quote</a>
+    </div>
         </div>
 
-        <div class="card">
-          <h3>Premium Travel Plan</h3>
-          <p><strong>Coverage:</strong> Up to $150,000</p>
-          <p><strong>Includes:</strong> Medical, trip cancellation, baggage, delays</p>
-          <p><strong>Duration:</strong> Up to 90 days</p>
-          <p><strong>Price:</strong> $180 / trip</p>
-          <a href="#" class="btn">Get Quote</a>
-        </div>
+      <div class="buybutton">
+        <a href="traveorder.html" target="_blank">Buy Now</a>
 
-        <div class="card">
-          <h3>Annual Multi-Trip</h3>
-          <p><strong>Coverage:</strong> Up to $100,000</p>
-          <p><strong>Includes:</strong> Unlimited trips throughout the year</p>
-          <p><strong>Duration:</strong> 365 days</p>
-          <p><strong>Price:</strong> $350 / year</p>
-          <a href="#" class="btn">Get Quote</a>
-        </div>
-      </div>
     </div>
   </section>
 
-  <!-- CTA / Request Quote -->
-  <section class="section quote">
+  <!-- FAQ Section -->
+  <section class="faq-section">
     <div class="container">
-      <h2>Request a Travel Insurance Quote</h2>
-      <form id="contactForm" class="quote-form">
-        <input type="text" name="name" placeholder="Full Name *" required>
-        <input type="email" name="email" placeholder="Email Address *" required>
-        <input type="text" name="destination" placeholder="Travel Destination">
-        <input type="date" name="travel-date" placeholder="Travel Date">
-        <textarea name="message" placeholder="Additional Information (Optional)"></textarea>
-        <button type="submit" class="btn">Submit Request</button>
-        <div id="formMsg" class="form-msg"></div>
-      </form>
+      <h2 class="section-title">Frequently Asked Questions</h2>
+      <p class="section-subtitle">Everything you need to know about our travel insurance</p>
+      
+      <div class="faq-wrapper">
+        <div class="faq-item">
+          <button class="faq-header">
+            <span class="faq-question">Which policy suits me best?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-content">
+            <p>
+              Your ideal travel insurance depends on your destination, trip duration, and activities.
+              For frequent travelers, multi-trip policies offer better value. We recommend comparing 
+              our plans based on coverage limits, medical benefits, and specific needs like adventure 
+              sports coverage or business travel protection. Our insurance advisors are available to 
+              help you choose the perfect plan.
+            </p>
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <button class="faq-header">
+            <span class="faq-question">Business and Holiday Coverage</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-content">
+            <p>
+              NextSure offers both business and leisure plans — covering medical emergencies, baggage 
+              loss or delay, trip cancellation, and personal liability protection. Business plans include 
+              additional coverage for work equipment, business documents, and meeting cancellation costs. 
+              Leisure plans focus on vacation-related incidents and activities.
+            </p>
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <button class="faq-header">
+            <span class="faq-question">Price (or Premium) of Policy</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-content">
+            <p>
+              Premiums depend on travel duration, destination risk level, traveler's age, and coverage 
+              amount. Get an instant personalized quote from our website by entering your travel details. 
+              Most policies start from as low as BDT 1,500 for short trips. Discounts are available for 
+              families and group travelers. Annual multi-trip policies offer significant savings for 
+              frequent travelers.
+            </p>
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <button class="faq-header">
+            <span class="faq-question">Claim Process</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-content">
+            <p>
+              In case of any incident, contact our claims support team 24/7 via phone or email. 
+              Provide your policy number, incident details, and supporting documents (medical reports, 
+              receipts, police reports if applicable). Most claims are processed within 7-14 business days. 
+              For medical emergencies, we offer cashless hospitalization at network hospitals.
+            </p>
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <button class="faq-header">
+            <span class="faq-question">Coverage Exclusions</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-content">
+            <p>
+              Claims arising from pre-existing medical conditions (unless declared and approved), 
+              illegal activities, self-inflicted injuries, or extreme adventure sports without add-on 
+              coverage are excluded. Travel to high-risk zones and losses due to war, terrorism, or 
+              nuclear incidents may also be excluded. Alcohol or drug-related incidents, routine 
+              medical check-ups, and preventive care are not covered. Please review your policy 
+              document for complete exclusion details.
+            </p>
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <button class="faq-header">
+            <span class="faq-question">How to Buy Online?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-content">
+            <p>
+              Buying travel insurance from NextSure is simple and secure. Just fill out the quote 
+              form with your travel details, receive instant quotes from multiple providers, 
+              compare coverage and prices, select your preferred plan, make secure online payment 
+              via bKash, Nagad, or credit card, and receive your digital policy certificate via 
+              email within hours. No paperwork required!
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -103,6 +186,7 @@
     </div>
   </footer>
 
+  <script src="js/travel.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>

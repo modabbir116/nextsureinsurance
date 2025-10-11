@@ -9,50 +9,45 @@
     body {
       font-family: "Poppins", sans-serif;
       background: linear-gradient(135deg,#007bff,#cbdde1);
-      background-image: linear-gradient(#04091e00,#04091e00),url(Images/banner.png);
-      color: #fff;
+      background-image: linear-gradient(#050c03be,#080a10b1),url(./images/travel2.jpg);
+
+
+  background-size: 125%; /* zoom effect */
+
+      color: #ffffff;
       display: flex;
+      background-image: 100%;
       justify-content: center;
       align-items:first baseline;
-      height: 130vh;
-      margin: 10px;
-      padding: 100px;
+      height: 1vh;
     }
     .text-box {
-      background:#007bff; color:#fff; font-weight:120; cursor:pointer; transition:background .2s;
-      outline-color: #28a745; text-decoration:none; display:inline-block;
+      background:#00cb00; color:#fff; font-weight:120; cursor:pointer; transition:background .3s;
+      outline-color: #2c246d; text-decoration:none; display:inline-block;
       padding:12px; width:120px; text-align:center; border-radius:8px; margin-top:20px;
 
     }
    
-    .card {
-      background: #1b132fb6;
-      backdrop-filter: blur(8px);
-      padding: 26px;
-      border-radius: 16px;
-      box-shadow: 0 10px 30px #43f602b3;
-      width: 1100px; padding: 32px;
-      max-width: 700px;
-    }
+    
     h2 { margin-bottom: 12px; }
-    label { display:block; text-align:left; font-weight:600; margin-top:10px; margin-bottom:6px; color:#fff; }
+    label { display:block; text-align:left; font-weight:700; margin-top:10px; margin-bottom:6px; color:#fff; }
     
     input, select, button {
-      width:70%; padding:10px; border-radius:10px; border:none; font-size:15px; margin-bottom:12px; outline:none;
+      width:70%; padding:10px; border-radius:10px; border:none; font-size:15px; margin-bottom:10px; outline:none;
     }
-    input, select { background:#fff; color:#222; }
+    input, select { background:#fff; color:#2c246d; }
     button {
-      background:#007bff; color:#fff; font-weight:120; cursor:pointer; transition:background .2s;
+      background:#00cb00; color:#fff; font-weight:120; cursor:pointer; transition:background .2s;
       padding:12px;
     }
-    button:hover { background:#0056b3; }
-    .result { display:none; margin-top:14px; font-size:15px; color:#fff; background: rgba(0,0,0,0.14); padding:16px; border-radius:8px; }
+    button:hover { background:#00cb00; }
+    .result { display:none; margin-top:14px; font-size:15px; color:#fff; background: #2c246d; padding:16px; border-radius:8px; }
     .age-display { font-size:14px; color:#fff; margin-top:-8px; margin-bottom:10px; }
     .flex { display:flex; gap:10px; }
-    .half { width:50%; }
+    .half { width:100%; }
     .info { font-size:13px; opacity:0.95; color:#fff; margin-top:6px; }
     .breakdown { text-align:left; margin-top:8px; line-height:1.6; }
-    hr.sep { border:none; border-top:1px solid rgba(255,255,255,0.12); margin:10px 0; }
+    hr.sep { border:none; border-top:1px solid #0f08088a; margin:10px 0; }
     .small { font-size:13px; opacity:0.95; color:#fff; }
     .row { display:flex; gap:8px; }
     .col { flex:1; }
@@ -66,14 +61,15 @@
 <body>
   
   <div class="card">
-    
-   <a href="Index.html"><img src="Images/NextSure logo New.png" width="100" alt="logo"></a> 
-    <h2>🧾 NextSure — OMP Travel Insurance Calculator</h2>
-    <div><br>
-1. Business & Holiday Plan Up to 180 days Coverage: $50,000 (Worldwide) €30,000 <br> (Schengen Countries) $100,000 (USA & Canada) <br><br>
-2. Study Plan Duration: 1-12 months Coverage: $50,000 (€30,000 for Schengen) <br>
-3. Employment Plan Duration: 1-12 months Coverage: $50,000 (€30,000 for Schengen) <br>
-4. Corporate Frequent Travel (CFT) Duration: 1 year (max 30 days per trip) Coverage: $50,000 <br>(or €30,000 for Schengen). <br><br>
+        <h2>🧾 NextSure — OMP Travel Insurance Calculator</h2>
+        <div><br>
+    1. Business & Holiday Plan Up to 180 days Coverage: $50,000 (Worldwide) €30,000 <br> (Schengen Countries) $100,000 (USA & Canada) <br><br>
+    2. Study Plan Duration: 1-12 months Coverage: $50,000 (€30,000 for Schengen) <br>
+    3. Employment Plan Duration: 1-12 months Coverage: $50,000 (€30,000 for Schengen) <br>
+    4. Corporate Frequent Travel (CFT) Duration: 1 year (max 30 days per trip) Coverage: $50,000 <br>(or €30,000 for Schengen). <br> <br>
+
+    Customer Support Hotline: +88 01851-008300
+<br><br>
 </div>
     <div class="row">
       <div class="col">
@@ -85,15 +81,15 @@
         </select>
       </div>
 
-      <div class="col">
-        <label for="country">Destination Country / Region</label>
-        <select id="country">
-          <option value="">Select Destination</option>
-          <option value="WorldExclUSCA">World Excluding USA &amp; Canada (Schengen)</option>
-          <option value="WorldInclUSCA">World Including USA &amp; Canada (Schengen)</option>
-          <option value="WorldExclUSCA_NonSch">World Excluding USA &amp; Canada (Non-Schengen)</option>
-          <option value="WorldInclUSCA_NonSch">World Including USA &amp; Canada (Non-Schengen)</option>
-          <option value="Afghanistan">Afghanistan</option>
+      <div class="search ">
+      <label for="country">Destination Country</label>
+      <input list="countryOptions" id="countrySearch" name="country" placeholder="Start typing country name..." required>
+<datalist id="countryOptions">
+      <option value="Åland Islands">Åland Islands</option>
+                <option value="Albania">Albania</option>
+                <option value="Algeria">Algeria</option>
+                <option value="American Samoa">American Samoa</option>
+                <option value="Afghanistan">Afghanistan</option>
                 <option value="Åland Islands">Åland Islands</option>
                 <option value="Albania">Albania</option>
                 <option value="Algeria">Algeria</option>
@@ -338,6 +334,19 @@
                 <option value="Zambia">Zambia</option>
                 <option value="Zimbabwe">Zimbabwe</option>
           <option value="Other">Other</option>
+
+</datalist>
+    </select>
+</div>
+      <div class="col">  
+        <label for="country">Insurance Category</label>
+        <select id="country">
+          <option value="">Select Destination</option>
+          <option value="WorldExclUSCA">World Excluding USA &amp; Canada (Schengen)</option>
+          <option value="WorldInclUSCA">World Including USA &amp; Canada (Schengen)</option>
+          <option value="WorldExclUSCA_NonSch">World Excluding USA &amp; Canada (Non-Schengen)</option>
+          <option value="WorldInclUSCA_NonSch">World Including USA &amp; Canada (Non-Schengen)</option>
+          
         </select>
       </div>
   </div>
@@ -345,13 +354,25 @@
     <input type="date" id="dob" onchange="calculateAge()" />
     <div class="age-display" id="ageDisplay">Your Age: —</div>
 
+
+    <label for="contactNumber">Contact Number</label>
+    <input type="tel" id="contactNumber" placeholder="Enter customer contact number" />
+    </select>
+    <div class="grid">
+      <div>
+        <label for="travelDate">Travel Date:</label>
+        <input type="date" id="travelDate">
+      </div>
+
+
+    
     <label for="days">Travel Duration (days)</label>
     <input type="number" id="days" placeholder="Enter number of travel days" min="1"/>
 
     <div class="flex">
       <div class="half">
-        <label for="adminPct">Only admin use (%)</label>
-        <input id="adminPct" type="number" placeholder="Only admin use" min="0" step="0.1" value="Only admin use"/>
+        <label for="adminPct">Special offer (%)</label>
+        <input id="adminPct" type="number" placeholder="Only Special offer" min="0" step="0.1" value="Only admin use"/>
       </div>
 
     <br>
@@ -367,7 +388,7 @@
         <button onclick="calculatePrice()">Calculate Price</button>
       </div>
       <div class="col">
-        <button onclick="resetForm()" style="background:#28a745">Reset</button>
+        <button onclick="resetForm()" style="background:#00cb00">Reset</button>
       </div>
     </div>
 
@@ -382,7 +403,7 @@
         <div class="contact-details">
           
                 <i class="contact-icon fas fa-phone"></i>
-                Customer Support Hotline: <a href="tel:+8801601276954">+88 01601-276954</a>
+                Customer Support Hotline: <a href="tel:+8801851008300">+88 01851-008300</a>
         
           
                 <i class="contact-icon fas fa-envelope"></i><br>
@@ -418,87 +439,72 @@
      ************************************************************************/
 
     const rates = {
-      /* ------------------ PLAN A — SCHENGEN — BUSINESS & HOLIDAY ------------------ */
+      /* ---------- PLAN A — SCHENGEN — B&H (from sheet) ---------- */
       "A-Schengen-BH": {
-        "0.5-40": { "1-14": 1549, "15-21": 1614, "22-28": 1808, "29-35": 2229, "36-47": 2553, "48-60": 3002, "61-75": 3712, "76-90": 4438, "91-120": 7503, "121-147": 9038, "148-180": 12557 },
-        "41-50":  { "1-14": 2324, "15-21": 2479, "22-28": 2767, "29-35": 3341, "36-47": 3830, "48-60": 4537, "61-75": 5600, "76-90": 6639, "91-120": 11330, "121-147": 13586, "148-180": 18741 },
-        "51-65":  { "1-14": 2673, "15-21": 2851, "22-28": 3182, "29-35": 3842, "36-47": 4405, "48-60": 5218, "61-75": 6440, "76-90": 7635, "91-120": 13030, "121-147": 15624, "148-180": 21552 },
-        "66-70":  { "1-14": 3124, "15-21": 3330, "22-28": 3719, "29-35": 4491, "36-47": 5148, "48-60": 6099, "61-75": 7528, "76-90": 8926 },
-        "71-75":  { "1-14": 10164, "15-21": 10836, "22-28": 12098, "29-35": 14617, "36-47": 16753, "48-60": 19842, "61-75": 24498, "76-90": 29040 },
-        "76-79":  { "1-14": 17788, "15-21": 18962, "22-28": 21170, "29-35": 25578, "36-47": 29318, "48-60": 34724, "61-75": 42871, "76-90": 50820 },
-        "80-85":  { "1-14": 35574, "15-21": 37924, "22-28": 42340, "29-35": 51157, "36-47": 58636, "48-60": 69448, "61-75": 85743, "76-90": 101640 }
+        "0.5-40": {"1-14":1549,"15-21":1614,"22-28":1808,"29-35":2229,"36-47":2553,"48-60":3002,"61-75":3712,"76-90":4438,"91-120":7503,"121-147":9038,"148-180":12557},
+        "41-50":  {"1-14":2324,"15-21":2479,"22-28":2767,"29-35":3341,"36-47":3830,"48-60":4537,"61-75":5600,"76-90":6639,"91-120":11330,"121-147":13586,"148-180":18741},
+        "51-65":  {"1-14":3124,"15-21":3330,"22-28":3719,"29-35":4491,"36-47":5148,"48-60":6099,"61-75":7528,"76-90":8926},// note: sheet uses larger senior categories (kept minimal)
+        "66-70":  {"1-14":17788,"15-21":18962,"22-28":21170,"29-35":25578,"36-47":29318,"48-60":34724,"61-75":42871,"76-90":50820},// note: sheet uses larger senior categories (kept minimal)
+        "71-75":  {"1-14":35574,"15-21":37924,"22-28":42340,"29-35":51157,"36-47":58636,"48-60":69448,"61-75":85743,"76-90":101640},// note: sheet uses larger senior categories (kept minimal)
+        "76-79":  {"1-14":50820}, // note: sheet uses larger senior categories (kept minimal)
+        "80-85":  {"1-14":50820}// note: sheet uses larger senior categories (kept minimal)
       },
 
-      /* ------------------ PLAN A — NON-SCHENGEN — BUSINESS & HOLIDAY ------------------ */
+      /* ---------- PLAN A — NON-SCHENGEN — B&H ---------- */
       "A-NonSchengen-BH": {
-        "0.5-40": { "1-14": 1239, "15-21": 1291, "22-28": 1446, "29-35": 1783, "36-47": 2042, "48-60": 2402, "61-75": 2970, "76-90": 3550, "91-120": 6003, "121-147": 7230, "148-180": 10046 },
-        "41-50":  { "1-14": 1860, "15-21": 1983, "22-28": 2213, "29-35": 2673, "36-47": 3063, "48-60": 3629, "61-75": 4480, "76-90": 5311 },
-        "51-65":  { "1-14": 2499, "15-21": 2664, "22-28": 2976, "29-35": 3592, "36-47": 4119, "48-60": 4879, "61-75": 6022, "76-90": 7140 },
-        "66-70":  { "1-14": 8131, "15-21": 8668, "22-28": 9678, "29-35": 11692, "36-47": 13402, "48-60": 15873, "61-75": 19598, "76-90": 23232 },
-        "71-75":  { "1-14": 14230, "15-21": 15169, "22-28": 16937, "29-35": 20462, "36-47": 23454, "48-60": 27779, "61-75": 34297, "76-90": 40657 },
-        "76-79":  { "1-14": 28460, "15-21": 30338, "22-28": 33873, "29-35": 40924, "36-47": 46908, "48-60": 55558, "61-75": 68592, "76-90": 81312 },
-        "80-85":  { "1-14": 40457, "15-21": 43339, "22-28": 48390, "29-35": 58024, "36-47": 66908, "48-60": 75558, "61-75": 86812 }
+        "0.5-40":{"1-14":1239,"15-21":1291,"22-28":1446,"29-35":1783,"36-47":2042,"48-60":2402,"61-75":2970,"76-90":3550,"91-120":6003,"121-147":7230,"148-180":10046},
+        "41-50": {"1-14":1860,"15-21":1983,"22-28":2213,"29-35":2673,"36-47":3063,"48-60":3629,"61-75":4480,"76-90":5311},
+        "51-65": {"1-14":2499,"15-21":2664,"22-28":2976,"29-35":3592,"36-47":4119,"48-60":4879,"61-75":6022,"76-90":7140},
+        "66-70": {"1-14":8131,"15-21":8668,"22-28":9678,"29-35":11692,"36-47":13402,"48-60":15873,"61-75":19598,"76-90":23232},
+        "71-75": {"1-14":14230,"15-21":15169,"22-28":16937,"29-35":20462,"36-47":23454,"48-60":27779,"61-75":34297,"76-90":40657},
+        "76-79": {"1-14":28460,"15-21":30338,"22-28":33873,"29-35":40924,"36-47":46908,"48-60":55558,"61-75":68592,"76-90":81312},
+        "80-85": {"1-14":40457}
       },
 
-      /* ------------------ PLAN B — SCHENGEN — BUSINESS & HOLIDAY ------------------ */
+      /* ---------- PLAN B — SCHENGEN — B&H ---------- */
       "B-Schengen-BH": {
-        "0.5-40": { "1-14": 2837, "15-21": 3013, "22-28": 3406, "29-35": 4090, "36-47": 4877, "48-60": 7856, "61-75": 11296, "76-90": 13593, "91-120": 19150, "121-147": 25428, "148-180": 33674 },
-        "41-50":  { "1-14": 5250, "15-21": 5623, "22-28": 6516, "29-35": 7687, "36-47": 9372, "48-60": 15228, "61-75": 22022, "76-90": 26473 },
-        "51-65":  { "1-14": 6664, "15-21": 7140, "22-28": 8272, "29-35": 9760, "36-47": 11900, "48-60": 19338, "61-75": 27966, "76-90": 33618 },
-        "66-70":  { "1-14": 21686, "15-21": 23233, "22-28": 26914, "29-35": 31754, "36-47": 38722, "48-60": 62923, "61-75": 90994, "76-90": 109390 },
-        "71-75":  { "1-14": 37960, "15-21": 40659, "22-28": 47100, "29-35": 55570, "36-47": 67763, "48-60": 110117, "61-75": 159240, "76-90": 191431 },
-        "76-79":  { "1-14": 75899, "15-21": 81318, "22-28": 94200, "29-35": 111139, "36-47": 135528, "48-60": 220233, "61-75": 318480, "76-90": 382863 },
-        "80-85":  { "1-14": 108427, "15-21": 116168, "22-28": 134571, "29-35": 158769, "36-47": 193611, "48-60": 314619, "61-75": 318480 }
+        "0.5-40":{"1-14":2837,"15-21":3013,"22-28":3406,"29-35":4090,"36-47":4877,"48-60":7856,"61-75":11296,"76-90":13593,"91-120":19150,"121-147":25428,"148-180":33674},
+        "41-50":{"1-14":5250,"15-21":5623,"22-28":6516,"29-35":7687,"36-47":9372,"48-60":15228,"61-75":22022,"76-90":26473},
+        "51-65":{"1-14":6664,"15-21":7140,"22-28":8272,"29-35":9760,"36-47":11900,"48-60":19338,"61-75":27966,"76-90":33618},
+        "66-70":{"1-14":21686,"15-21":23233,"22-28":26914,"29-35":31754,"36-47":38722,"48-60":62923,"61-75":90994,"76-90":109390},
+        "71-75":{"1-14":37960,"15-21":40659,"22-28":47100,"29-35":55570,"36-47":67763,"48-60":110117,"61-75":159240,"76-90":191431},
+        "76-79":{"1-14":75899,"15-21":81318,"22-28":94200,"29-35":111139,"36-47":135528,"48-60":220233,"61-75":318480,"76-90":382863},
+        "80-85":{"1-14":108427}
       },
 
-      /* ------------------ PLAN B — NON-SCHENGEN — BUSINESS & HOLIDAY ------------------ */
+      /* ---------- PLAN B — NON-SCHENGEN — B&H ---------- */
       "B-NonSchengen-BH": {
-        "0.5-40": { "1-14": 2269, "15-21": 2411, "22-28": 2724, "29-35": 3271, "36-47": 3901, "48-60": 6284, "61-75": 9037, "76-90": 10874, "91-120": 15320, "121-147": 20341, "148-180": 26939 },
-        "41-50":  { "1-14": 4200, "15-21": 4499, "22-28": 5212, "29-35": 6149, "36-47": 7497, "48-60": 12182, "61-75": 17910, "76-90": 21178 },
-        "51-65":  { "1-14": 5331, "15-21": 5712, "22-28": 6618, "29-35": 7808, "36-47": 9520, "48-60": 15470, "61-75": 22371, "76-90": 26894 },
-        "66-70":  { "1-14": 17349, "15-21": 18587, "22-28": 21531, "29-35": 25402, "36-47": 30977, "48-60": 50339, "61-75": 72796, "76-90": 87511 },
-        "71-75":  { "1-14": 30360, "15-21": 32526, "22-28": 37679, "29-35": 44454, "36-47": 54210, "48-60": 88093, "61-75": 127392, "76-90": 153146 },
-        "76-79":  { "1-14": 60720, "15-21": 65052, "22-28": 75358, "29-35": 88910, "36-47": 108420, "48-60": 176187, "61-75": 254784, "76-90": 306291 },
-        "80-85":  { "1-14": 86742, "15-21": 92931, "22-28": 111304, "29-35": 127013, "36-47": 154886, "48-60": 251694 }
+        "0.5-40":{"1-14":2269,"15-21":2411,"22-28":2724,"29-35":3271,"36-47":3901,"48-60":6284,"61-75":9037,"76-90":10874,"91-120":15320,"121-147":20341,"148-180":26939},
+        "41-50":{"1-14":4200,"15-21":4499,"22-28":5212,"29-35":6149,"36-47":7497,"48-60":12182,"61-75":17910,"76-90":21178},
+        "51-65":{"1-14":5331,"15-21":5712,"22-28":6618,"29-35":7808,"36-47":9520,"48-60":15470,"61-75":22371,"76-90":26894},
+        "66-70":{"1-14":17349,"15-21":18587,"22-28":21531,"29-35":25402,"36-47":30977,"48-60":50339,"61-75":72796,"76-90":87511},
+        "71-75":{"1-14":30360,"15-21":32526,"22-28":37679,"29-35":44454,"36-47":54210,"48-60":88093,"61-75":127392,"76-90":153146},
+        "76-79":{"1-14":60720,"15-21":65052,"22-28":75358,"29-35":88910,"36-47":108420,"48-60":176187,"61-75":254784,"76-90":306291},
+        "80-85":{"1-14":86742}
       },
 
-      /* ------------------ PLAN C — NON-SCHENGEN — STUDY (1-12 months) ------------------ */
+      /* ---------- PLAN C — NON-SCHENGEN — STUDY (1-12 months) ---------- */
       "C-NonSchengen-ST": {
-        "0.5-40": {
-          "1month": 2675, "6month": 16049, "7month": 18724, "8month": 21399, "9month": 24074, "10month": 26749, "11month": 29424, "12month": 32099
-        },
-        "41-59": {
-          "1month": 2140, "6month": 12841, "7month": 14981, "8month": 17121, "9month": 19261, "10month": 21402, "11month": 23542, "12month": 25682
-        }
+        "0.5-40":{"6month":16049,"12month":32099},
+        "41-59":{"6month":12841,"12month":25682}
       },
 
-      /* ------------------ PLAN D — NON-SCHENGEN — STUDY (1-12 months) ------------------ */
+      /* ---------- PLAN D — NON-SCHENGEN — STUDY (1-12 months) ---------- */
       "D-NonSchengen-ST": {
-        "0.5-40": {
-          "1month": 2140, "6month": 12841, "7month": 14981, "8month": 17121, "9month": 19261, "10month": 21402, "11month": 23542, "12month": 25682
-        },
-        "41-59": {
-          "1month": 2600, "6month": 19389, "7month": 22621, "8month": 25852, "9month": 29084, "10month": 32315, "11month": 35547, "12month": 38778
-        }
+        "0.5-40":{"6month":12841,"12month":25682},
+        "41-59":{"6month":19389,"12month":38778}
       },
 
-      /* ------------------ PLAN C & D — SCHENGEN — STUDY (mirrored where PDF gives same numbers) ------------------ */
+      /* ---------- PLAN C — SCHENGEN — STUDY (mirrored) ---------- */
       "C-Schengen-ST": {
-        "0.5-40": {
-          "1month": 2675, "6month": 16049, "7month": 18724, "8month": 21399, "9month": 24074, "10month": 26749, "11month": 29424, "12month": 32099
-        },
-        "41-59": {
-          "1month": 2140, "6month": 12841, "7month": 14981, "8month": 17121, "9month": 19261, "10month": 21402, "11month": 23542, "12month": 25682
-        }
+        "0.5-40":{"6month":16049,"12month":32099},
+        "41-59":{"6month":12841,"12month":25682}
       },
 
+      /* ---------- PLAN D — SCHENGEN — STUDY (mirrored) ---------- */
       "D-Schengen-ST": {
-        "0.5-40": {
-          "1month": 2140, "6month": 12841, "7month": 14981, "8month": 17121, "9month": 19261, "10month": 21402, "11month": 23542, "12month": 25682
-        },
-        "41-59": {
-          "1month": 2600, "6month": 19389, "7month": 22621, "8month": 25852, "9month": 29084, "10month": 32315, "11month": 35547, "12month": 38778
-        }
+        "0.5-40":{"6month":12841,"12month":25682},
+        "41-59":{"6month":19389,"7month":22621,"8month":25852,"9month":29084,"10month":32315,"11month":35547,"12month":38778}
       }
     };
 
@@ -521,14 +527,12 @@
     }
 
     function isSchengenCountry(name){
-      const sch = ["France","Germany","Italy","Spain","Netherlands","Switzerland","Austria","Belgium","Norway","Sweden","Denmark","Finland","Portugal","Greece"];
+      const sch = ["Austria","Belgium","Bulgaria","Croatia","Czech Republic","Denmark","Estonia","Finland","France","Germany","Greece","Hungary","Iceland","Italy","Latvia","Liechtenstein","Lithuania","Luxembourg","Malta","Netherlands","Norway","Poland","Portugal","Romania","Slovakia","Slovenia","Spain","Sweden","Switzerlan"];
       return sch.includes(name);
     }
 
-    function ageBandFromAge(age, isStudy=false){
-      if(isStudy){
-        return (age <= 40) ? "0.5-40" : "41-59";
-      } else {
+    function ageBandFromAge(age, isStudy=false) { if(isStudy){return (age <= 40) ? "0.5-40" : "41-59" ;} 
+    else {
         if (age <= 40) return "0.5-40";
         if (age <= 50) return "41-50";
         if (age <= 65) return "51-65";
@@ -538,6 +542,28 @@
         return "80-85";
       }
     }
+
+    function durationKeyDays(days){
+      if(days <= 14) return "1-14";
+      if(days <= 21) return "15-21";
+      if(days <= 28) return "22-28";
+      if(days <= 35) return "29-35";
+      if(days <= 47) return "36-47";
+      if(days <= 60) return "48-60";
+      if(days <= 75) return "61-75";
+      if(days <= 90) return "76-90";
+      if(days <= 120) return "91-120";
+      if(days <= 147) return "121-147";
+      if(days <= 180) return "148-180";
+      return null;
+    }
+
+    function durationKeyMonths(days){
+      
+      if(days <= 1*180) return "6month";
+      if(days <= 181*365)return "12month";
+    }
+
 
     function durationBandForDays(days){
       if (days <= 14) return "1-14";
@@ -555,14 +581,11 @@
     }
 
     function monthBandFromDays(days){
-      if (days <= 31) return "1month";
-      if (days <= 31*6) return "6month";
-      if (days <= 31*7) return "7month";
-      if (days <= 31*8) return "8month";
-      if (days <= 31*9) return "9month";
-      if (days <= 31*10) return "10month";
-      if (days <= 31*11) return "11month";
-      return "12month";
+     
+      if (days <= 1*180) return "6month";
+     
+      if (days <= 181*365) return "12month";
+     
     }
 
     // ---------- main calculation ----------
@@ -662,8 +685,8 @@
       const vatRate = 0.15;
       const vatAmount = round2(netPremium * vatRate);
       const grossPremium = round2(netPremium + vatAmount);
-      const adminFee = round2(grossPremium * (adminPct / 100));
-      const beforeMultiplier = round2(grossPremium + adminFee);
+      const adminFee = round2(netPremium * (adminPct / 100));
+      const beforeMultiplier = round2(grossPremium - adminFee);
       const finalPayable = round2(beforeMultiplier * multiplier);
 
       // Display with lettered steps A-E
@@ -676,14 +699,14 @@
           <hr class="sep">
           <div><strong>.</strong> Net Premium: ৳ ${numberWithCommas(netPremium)}</div>
           <div><strong>.</strong> VAT (15%): ৳ ${numberWithCommas(vatAmount)}</div>
-          <div><strong>.</strong> Gross Premium (A + B): ৳ ${numberWithCommas(grossPremium)}</div>
-          <div><strong>.</strong> Admin Fee (${adminPct}% of Gross): ৳ ${numberWithCommas(adminFee)}</div>
+          <div><strong>.</strong> Gross Premium (Net + VAT): ৳ ${numberWithCommas(grossPremium)}</div>
+          <div><strong>.</strong> Special offer (${adminPct}% of Gross): ৳ ${numberWithCommas(adminFee)}</div>
           <div><strong>.</strong> Final Payable (after Multiplier ${multiplier}): ৳ ${numberWithCommas(finalPayable)}</div>
           <hr class="sep">
           <div class="small">Notes: Net & VAT values come from Nextsure rate chart. VAT is applied at 15%.</div>
         </div>
         <div class="text-box" id="text-box">
-      <a href="http://wa.me/8801851008300"> Buy Now </a> </div>
+      <a href="http://wa.me/8801851008300"> Confirm </a> </div>
   `;
     }
 

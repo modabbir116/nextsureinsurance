@@ -135,6 +135,15 @@ body {
   max-width: 1400px;
   margin: auto;
 }
+.brand_logo{
+  width: 170px;
+  
+}
+
+.brand img{
+  width: 100%;
+} 
+
 
 .brand {
   display: flex;
@@ -151,25 +160,6 @@ body {
   position: relative;
 }
 
-.brand::before {
-  content: '';
-  position: absolute;
-  left: -10px;
-  width: 4px;
-  height: 100%;
-  background: var(--secondary);
-  border-radius: 2px;
-  transform: scaleY(0);
-  transition: var(--transition);
-}
-
-.brand:hover::before {
-  transform: scaleY(1);
-}
-
-.brand:hover {
-  transform: translateX(8px);
-}
 
 .nav {
   display: flex;
@@ -328,25 +318,10 @@ body {
 .hero {
   position: relative;
   overflow: hidden;
-  height: 500px;
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.hero::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(
-    135deg,
-    rgba(30, 27, 75, 0.8) 0%,
-    rgba(16, 185, 129, 0.6) 100%
-  );
-  z-index: 1;
 }
 
 .hero img {
@@ -354,9 +329,9 @@ body {
   height: 100%;
   object-fit: cover;
   display: block;
-  filter: brightness(60%) contrast(1.2);
-  transition: transform 8s ease-out;
-  animation: zoomIn 20s ease-in-out infinite alternate;
+  /* filter: brightness(60%) contrast(1.2); */
+  /* transition: transform 8s ease-out;
+  animation: zoomIn 20s ease-in-out infinite alternate; */
 }
 
 @keyframes zoomIn {
@@ -388,7 +363,35 @@ body {
   background: linear-gradient(90deg, transparent, var(--secondary), transparent);
   opacity: 0.5;
 }
+.buybutton a {
+  background: #10b981;
+  color: #fff;
+  padding: 1rem 2.5rem;
+  border-radius: 50px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+  /* width: 215px;
+  text-align: center;
+  display: inline-block; */
 
+}
+.insurance_detals{
+  margin-bottom: 40px;
+}
+.insurance_detals ul{
+  display: flex;
+  flex-direction: column;
+  color: #000;
+  margin-bottom: 40px;
+}
+.insurance_detals ul li{
+  color: #000;
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
 .product-details h2 {
   font-size: 3.5rem;
   color: var(--primary);
