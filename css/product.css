@@ -11,7 +11,9 @@
   padding: 0;
   box-sizing: border-box;
 }
-
+ul{
+ list-style-type: none
+}
 :root {
   --primary: #1e1b4b;
   --secondary: #10b981;
@@ -348,7 +350,7 @@ body {
 =========================== */
 .product-details {
   background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
-  padding: 8rem 2rem;
+  padding: 3rem 2rem;
   position: relative;
 }
 
