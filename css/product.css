@@ -137,15 +137,14 @@ body {
   max-width: 1400px;
   margin: auto;
 }
+
 .brand_logo{
   width: 170px;
-  
 }
 
 .brand img{
   width: 100%;
 } 
-
 
 .brand {
   display: flex;
@@ -161,7 +160,6 @@ body {
   transition: var(--transition);
   position: relative;
 }
-
 
 .nav {
   display: flex;
@@ -209,7 +207,7 @@ body {
   width: 100%;
 }
 
-/* Submenu */
+/* Submenu - Enhanced & Beautiful */
 .has-submenu {
   position: relative;
 }
@@ -220,16 +218,17 @@ body {
   top: 100%;
   left: 0;
   background: var(--white);
-  padding: 0.8rem 0;
+  padding: 1rem 0;
   list-style: none;
-  margin-top: 1rem;
-  border-radius: 12px;
-  box-shadow: var(--shadow-lg);
-  min-width: 220px;
+  margin-top: 1.2rem;
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+  min-width: 250px;
   opacity: 0;
-  transform: translateY(-10px) scale(0.95);
-  transition: var(--transition);
-  border: 1px solid #e2e8f0;
+  transform: translateY(-15px) scale(0.92);
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  border: 1px solid rgba(16, 185, 129, 0.15);
+  backdrop-filter: blur(10px);
 }
 
 .has-submenu:hover .submenu {
@@ -238,17 +237,55 @@ body {
   transform: translateY(0) scale(1);
 }
 
+.submenu::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: 20px;
+  width: 12px;
+  height: 12px;
+  background: var(--white);
+  border: 1px solid rgba(16, 185, 129, 0.15);
+  transform: rotate(45deg);
+  border-radius: 2px;
+}
+
 .submenu li a {
-  display: block;
-  padding: 0.9rem 1.5rem;
+  display: flex;
+  align-items: center;
+  padding: 1rem 1.5rem;
   color: #334155;
-  transition: var(--transition);
-  font-size: 0.9rem;
-  border-left: 3px solid transparent;
+  transition: all 0.3s ease;
+  font-size: 0.95rem;
+  border-left: 4px solid transparent;
+  position: relative;
+  overflow: hidden;
 }
 
 .submenu li a::before {
-  display: none;
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, rgba(16, 185, 129, 0.1) 0%, transparent 100%);
+  transition: width 0.3s ease;
+  z-index: -1;
+}
+
+.submenu li a:hover::before {
+  width: 100%;
+}
+
+.submenu li a::after {
+  content: '→';
+  margin-left: auto;
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: all 0.3s ease;
+  color: var(--secondary);
+  font-weight: 700;
 }
 
 .submenu li a:hover {
@@ -256,6 +293,11 @@ body {
   color: var(--secondary);
   padding-left: 2rem;
   border-left-color: var(--secondary);
+}
+
+.submenu li a:hover::after {
+  opacity: 1;
+  transform: translateX(0);
 }
 
 /* Mobile Toggle */
@@ -331,9 +373,6 @@ body {
   height: 100%;
   object-fit: cover;
   display: block;
-  /* filter: brightness(60%) contrast(1.2); */
-  /* transition: transform 8s ease-out;
-  animation: zoomIn 20s ease-in-out infinite alternate; */
 }
 
 @keyframes zoomIn {
@@ -365,6 +404,7 @@ body {
   background: linear-gradient(90deg, transparent, var(--secondary), transparent);
   opacity: 0.5;
 }
+
 .buybutton a {
   background: #10b981;
   color: #fff;
@@ -374,26 +414,32 @@ body {
   text-decoration: none;
   transition: all 0.3s ease;
   box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
-  /* width: 215px;
-  text-align: center;
-  display: inline-block; */
-
+  display: inline-block;
 }
+
+.buybutton a:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(16, 185, 129, 0.6);
+}
+
 .insurance_detals{
   margin-bottom: 40px;
 }
+
 .insurance_detals ul{
   display: flex;
   flex-direction: column;
   color: #000;
   margin-bottom: 40px;
 }
+
 .insurance_detals ul li{
   color: #000;
   font-size: 18px;
   font-weight: 500;
   margin-bottom: 10px;
 }
+
 .product-details h2 {
   font-size: 3.5rem;
   color: var(--primary);
@@ -802,55 +848,530 @@ body {
 }
 
 /* ===========================
-   RESPONSIVE DESIGN
+   RESPONSIVE DESIGN - Tablet (992px)
 =========================== */
 @media (max-width: 992px) {
-  .product-details .grid.cards {
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2.5rem;
+  .container {
+    padding: 0 1.5rem;
+  }
+
+  .header-inner {
+    padding: 1rem 1.5rem;
+  }
+
+  .brand_logo {
+    width: 150px;
+  }
+
+  .nav-list {
+    gap: 1.8rem;
+  }
+
+  .nav-list li a {
+    font-size: 0.9rem;
   }
 
   .product-details {
-    padding: 6rem 2rem;
+    padding: 6rem 1.5rem;
   }
 
   .product-details h2 {
     font-size: 2.8rem;
+    margin-bottom: 1rem;
   }
 
-  .quote {
-    padding: 6rem 2rem;
-  }
-}
-
-@media (max-width: 768px) {
-  .hero {
-    height: 400px;
-  }
-
-  .product-details {
-    padding: 5rem 1.5rem;
-  }
-
-  .product-details h2 {
-    font-size: 2.4rem;
+  .product-details h2::after {
+    bottom: -12px;
+    width: 80px;
   }
 
   .product-details > .container > p {
     font-size: 1.1rem;
     margin-bottom: 3rem;
+    margin-top: 1.5rem;
+  }
+
+  .product-details .grid.cards {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2.5rem;
+  }
+
+  .product-details .card {
+    padding: 3rem 2.5rem;
+  }
+
+  .product-details .card h3 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .product-details .card h3::before {
+    font-size: 2.2rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .product-details .card p {
+    font-size: 1rem;
+  }
+
+  .quote {
+    padding: 6rem 1.5rem;
+  }
+
+  .quote h2 {
+    font-size: 2.5rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .quote-form {
+    padding: 3.5rem;
+  }
+
+  .quote-form input,
+  .quote-form textarea {
+    padding: 1rem 1.3rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .site-footer {
+    padding: 3rem 1.5rem;
+  }
+
+  .insurance_detals ul li {
+    font-size: 16px;
+  }
+}
+
+/* ===========================
+   RESPONSIVE DESIGN - Mobile (768px)
+=========================== */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 1rem;
+  }
+
+  .header-inner {
+    padding: 1rem 1rem;
+  }
+
+  .brand_logo {
+    width: 130px;
+  }
+
+  .brand {
+    font-size: 1.5rem;
+  }
+
+  .nav-toggle {
+    display: block;
+  }
+
+  .nav-list {
+    display: none;
+    gap: 0;
+    flex-direction: column;
+    position: absolute;
+    top: 70px;
+    left: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(10px);
+    padding: 1.5rem 0;
+    border-radius: 0 0 16px 16px;
+    box-shadow: var(--shadow-lg);
+  }
+
+  .nav-list.active {
+    display: flex;
+  }
+
+  .nav-list li {
+    width: 100%;
+    text-align: center;
+    border-bottom: 1px solid #e2e8f0;
+  }
+
+  .nav-list li:last-child {
+    border-bottom: none;
+  }
+
+  .nav-list li a {
+    padding: 1rem 1.5rem;
+    font-size: 0.9rem;
+  }
+
+  .nav-list li a::before {
+    display: none;
+  }
+
+  .nav-list li a:hover {
+    background: rgba(16, 185, 129, 0.08);
+  }
+
+  .has-submenu > a::after {
+    content: '▼';
+    margin-left: 0.5rem;
+    font-size: 0.65rem;
+    transition: transform 0.3s ease;
+  }
+
+  .has-submenu.active > a::after {
+    transform: rotate(180deg);
+  }
+
+  .has-submenu .submenu {
+    position: static;
+    display: none;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transform: none;
+    margin-top: 0;
+    background: #f0fdf4;
+    box-shadow: none;
+    border: none;
+    border-radius: 0;
+    min-width: auto;
+    transition: all 0.4s ease;
+    padding: 0;
+  }
+
+  .has-submenu .submenu::before {
+    display: none;
+  }
+
+  .has-submenu:hover .submenu {
+    display: none;
+  }
+
+  .has-submenu.active .submenu {
+    display: block;
+    max-height: 500px;
+    opacity: 1;
+    padding: 1rem 0;
+  }
+
+  .has-submenu .submenu li a {
+    padding-left: 3rem;
+    font-size: 0.85rem;
+    color: #64748b;
+    border-left: 3px solid transparent;
+  }
+
+  .has-submenu .submenu li a:hover {
+    background: rgba(16, 185, 129, 0.1);
+    color: var(--secondary);
+    border-left-color: var(--secondary);
+  }
+
+  .has-submenu .submenu li a::after {
+    display: none;
+  }
+
+  .submenu.active {
+    display: block;
+  }
+
+  .hero {
+    height: 300px;
+  }
+
+  .product-details {
+    padding: 4rem 1rem;
+  }
+
+  .product-details h2 {
+    font-size: 2rem;
+    margin-bottom: 0.8rem;
+    letter-spacing: -1px;
+  }
+
+  .product-details h2::after {
+    bottom: -10px;
+    width: 60px;
+    height: 4px;
+  }
+
+  .product-details > .container > p {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+    margin-top: 1.2rem;
   }
 
   .product-details .grid.cards {
     grid-template-columns: 1fr;
-    gap: 2rem;
+    gap: 1.8rem;
+    max-width: 100%;
   }
 
   .product-details .card {
-    padding: 2.5rem 2rem;
+    padding: 2rem 1.5rem;
+    border-radius: 16px;
+  }
+
+  .product-details .card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .product-details .card h3::before {
+    font-size: 1.8rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .product-details .card p {
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+  }
+
+  .product-details .card p strong {
+    min-width: 100px;
   }
 
   .quote {
-    padding: 5rem 1.5rem
+    padding: 4rem 1rem;
+  }
+
+  .quote::before {
+    width: 400px;
+    height: 400px;
+    top: -20%;
+    right: -30%;
+  }
+
+  .quote h2 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    letter-spacing: -0.5px;
+  }
+
+  .quote-form {
+    padding: 2.5rem 1.5rem;
+    border-radius: 16px;
+  }
+
+  .quote-form input,
+  .quote-form textarea {
+    padding: 1rem 1rem;
+    margin-bottom: 1.2rem;
+    font-size: 1rem;
+  }
+
+  .quote-form textarea {
+    min-height: 120px;
+  }
+
+  .quote-form .btn {
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
+  }
+
+  .buybutton a {
+    padding: 0.9rem 2rem;
+    font-size: 0.95rem;
+  }
+
+  .insurance_detals {
+    margin-bottom: 30px;
+  }
+
+  .insurance_detals ul li {
+    font-size: 16px;
+    margin-bottom: 8px;
+  }
+
+  .site-footer {
+    padding: 2.5rem 1rem;
+  }
+
+  .footer-inner p {
+    font-size: 0.95rem;
+  }
+}
+
+/* ===========================
+   RESPONSIVE DESIGN - Small Mobile (480px)
+=========================== */
+@media (max-width: 480px) {
+  html {
+    font-size: 14px;
+  }
+
+  .container {
+    padding: 0 0.75rem;
+  }
+
+  .header-inner {
+    padding: 0.8rem 0.75rem;
+  }
+
+  .brand_logo {
+    width: 110px;
+  }
+
+  .brand {
+    font-size: 1.3rem;
+    letter-spacing: -0.5px;
+  }
+
+  .hamburger,
+  .hamburger::before,
+  .hamburger::after {
+    width: 24px;
+  }
+
+  .hamburger::before {
+    top: -8px;
+  }
+
+  .hamburger::after {
+    top: 8px;
+  }
+
+  .nav-list {
+    top: 60px;
+    border-radius: 0 0 12px 12px;
+    padding: 1rem 0;
+  }
+
+  .nav-list li a {
+    padding: 0.8rem 1rem;
+    font-size: 0.85rem;
+  }
+
+  .hero {
+    height: 250px;
+  }
+
+  .product-details {
+    padding: 3rem 0.75rem;
+  }
+
+  .product-details h2 {
+    font-size: 1.6rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .product-details h2::after {
+    width: 50px;
+    bottom: -8px;
+  }
+
+  .product-details > .container > p {
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+    margin-top: 1rem;
+    line-height: 1.6;
+  }
+
+  .product-details .grid.cards {
+    gap: 1.5rem;
+  }
+
+  .product-details .card {
+    padding: 1.5rem 1.2rem;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+  }
+
+  .product-details .card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+  }
+
+  .product-details .card h3::before {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .product-details .card p {
+    font-size: 0.9rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .product-details .card p strong {
+    display: block;
+    min-width: auto;
+    margin-bottom: 0.3rem;
+  }
+
+  .quote {
+    padding: 3rem 0.75rem;
+  }
+
+  .quote::before {
+    width: 300px;
+    height: 300px;
+    top: -15%;
+    right: -40%;
+  }
+
+  .quote h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .quote-form {
+    padding: 2rem 1.2rem;
+    border-radius: 12px;
+  }
+
+  .quote-form input,
+  .quote-form textarea {
+    padding: 0.9rem 0.8rem;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    border-radius: 8px;
+  }
+
+  .quote-form textarea {
+    min-height: 100px;
+  }
+
+  .quote-form .btn {
+    padding: 0.9rem 1.5rem;
+    font-size: 0.95rem;
+    border-radius: 25px;
+  }
+
+  .buybutton a {
+    padding: 0.8rem 1.5rem;
+    font-size: 0.9rem;
+    border-radius: 25px;
+  }
+
+  .insurance_detals {
+    margin-bottom: 25px;
+  }
+
+  .insurance_detals ul li {
+    font-size: 15px;
+    margin-bottom: 7px;
+    font-weight: 500;
+  }
+
+  .site-footer {
+    padding: 2rem 0.75rem;
+  }
+
+  .footer-inner p {
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+
+  .preloader {
+    gap: 1.5rem;
+  }
+
+  .loader {
+    width: 60px;
+    height: 60px;
+    border-width: 4px;
+  }
+
+  .loader::after {
+    width: 35px;
+    height: 35px;
+    border-width: 2px;
   }
 }
