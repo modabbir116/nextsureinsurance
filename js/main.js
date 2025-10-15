@@ -1,6 +1,7 @@
 // ===========================
 // ENHANCED NEXTSURE JAVASCRIPT
 // Professional, Interactive & Optimized
+// Mobile Navigation Fixed
 // ===========================
 
 'use strict';
@@ -9,7 +10,6 @@
 // UTILITY FUNCTIONS
 // ===========================
 const utils = {
-  // Debounce function for performance
   debounce(func, wait) {
     let timeout;
     return function executedFunction(...args) {
@@ -22,7 +22,6 @@ const utils = {
     };
   },
 
-  // Throttle function for scroll events
   throttle(func, limit) {
     let inThrottle;
     return function(...args) {
@@ -34,7 +33,6 @@ const utils = {
     };
   },
 
-  // Check if element is in viewport
   isInViewport(element) {
     const rect = element.getBoundingClientRect();
     return (
@@ -62,7 +60,6 @@ class Preloader {
       this.hide();
     });
 
-    // Fallback: force hide after 3 seconds
     setTimeout(() => this.hide(), 3000);
   }
 
@@ -102,7 +99,7 @@ class HeaderScroll {
     }, 100);
 
     window.addEventListener('scroll', handleScroll);
-    handleScroll(); // Initial check
+    handleScroll();
   }
 }
 
@@ -250,13 +247,14 @@ class HeroSlider {
 }
 
 // ===========================
-// MOBILE NAVIGATION (FIXED & IMPROVED)
+// MOBILE NAVIGATION (FULLY FIXED)
 // ===========================
 class MobileNav {
   constructor() {
     this.navToggle = document.querySelector('.nav-toggle');
     this.navList = document.querySelector('.nav-list');
     this.hasSubmenuItems = document.querySelectorAll('.has-submenu');
+    this.heroSection = document.querySelector('.hero');
     this.overlay = null;
     this.init();
   }
@@ -264,10 +262,9 @@ class MobileNav {
   init() {
     if (!this.navToggle || !this.navList) return;
 
-    // Create or get overlay element
     this.overlay = document.querySelector('.menu-overlay') || this.createOverlay();
 
-    // Toggle menu
+    // Toggle menu button click
     this.navToggle.addEventListener('click', (e) => {
       e.stopPropagation();
       this.toggleMenu();
@@ -278,13 +275,13 @@ class MobileNav {
       this.closeMenu();
     });
 
-    // Close menu when clicking on regular links
+    // Handle navigation link clicks
     this.navList.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', (e) => {
         const parentLi = link.closest('li');
         const hasSubmenu = parentLi && parentLi.classList.contains('has-submenu');
         
-        // যদি submenu না থাকে তাহলে menu close করবে
+        // Close menu if not a submenu parent
         if (!hasSubmenu || window.innerWidth > 992) {
           this.closeMenu();
         }
@@ -349,7 +346,7 @@ class MobileNav {
       }
     });
 
-    // Close submenu when screen size changes
+    // Handle window resize
     window.addEventListener('resize', utils.debounce(() => {
       if (window.innerWidth > 992) {
         this.closeMenu();
@@ -375,6 +372,15 @@ class MobileNav {
     this.overlay.classList.toggle('active');
     document.body.classList.toggle('menu-open');
     
+    // Hide/show hero section on mobile when menu is open
+    if (this.heroSection && window.innerWidth <= 992) {
+      if (isActive) {
+        this.heroSection.style.display = 'none';
+      } else {
+        this.heroSection.style.display = 'block';
+      }
+    }
+    
     this.navToggle.setAttribute('aria-expanded', isActive);
   }
 
@@ -384,6 +390,11 @@ class MobileNav {
     this.overlay.classList.remove('active');
     document.body.classList.remove('menu-open');
     this.navToggle.setAttribute('aria-expanded', 'false');
+    
+    // Show hero section again
+    if (this.heroSection && window.innerWidth <= 992) {
+      this.heroSection.style.display = 'block';
+    }
     
     // Close all submenus
     this.hasSubmenuItems.forEach(item => {
@@ -466,7 +477,6 @@ class FormHandler {
       this.handleSubmit();
     });
 
-    // Real-time validation
     const inputs = this.form.querySelectorAll('input, textarea, select');
     inputs.forEach(input => {
       input.addEventListener('blur', () => {
@@ -485,18 +495,15 @@ class FormHandler {
     const value = field.value.trim();
     let isValid = true;
 
-    // Remove previous error
     field.classList.remove('error');
     const errorMsg = field.parentElement.querySelector('.error-msg');
     if (errorMsg) errorMsg.remove();
 
-    // Check required fields
     if (field.hasAttribute('required') && !value) {
       isValid = false;
       this.showFieldError(field, 'এই ফিল্ডটি আবশ্যক');
     }
 
-    // Email validation
     if (field.type === 'email' && value) {
       if (!this.isValidEmail(value)) {
         isValid = false;
@@ -691,7 +698,7 @@ class ProductLinksUpdater {
 
   updateLinks() {
     const productCards = document.querySelectorAll('#products .card');
-    const products = ['travel.html', 'fire.html', 'car.html', 'marine.html'];
+    const products = ['travel.html', 'fire.html', 'Motor.html', 'marine.html'];
     
     productCards.forEach((card, index) => {
       const link = card.querySelector('.btn-link');
@@ -817,7 +824,6 @@ class App {
 
   initializeModules() {
     try {
-      // Core modules
       new Preloader();
       new HeaderScroll();
       new HeroSlider();
@@ -828,12 +834,9 @@ class App {
       new FooterYear();
       new ScrollAnimations();
       new ProductLinksUpdater();
-      
-      // Optional features
       new ScrollProgressBar();
       new LazyImageLoader();
       
-      // Performance monitoring (development only)
       if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
         new PerformanceMonitor();
       }
