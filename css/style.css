@@ -782,7 +782,6 @@ body {
   position: relative;
   overflow: hidden;
   box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);
-  width: 100%;
 }
 
 .btn::before {
