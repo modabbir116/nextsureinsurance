@@ -623,9 +623,15 @@ body {
   box-shadow: var(--shadow-sm);
   position: relative;
   overflow: hidden;
+  z-index: 1;
 }
 
-.partner .prime img {
+.partner a {
+  position: relative;
+  z-index: 2; /* ensure link is clickable */
+}
+
+.partner.prime img {
   max-height: 170px;
 }
 
@@ -639,6 +645,7 @@ body {
   background: linear-gradient(135deg, rgba(16, 185, 129, 0.05), transparent);
   opacity: 0;
   transition: var(--transition);
+  z-index: 0;
 }
 
 .partner:hover::before {
@@ -658,6 +665,7 @@ body {
   box-shadow: var(--shadow-lg);
   border-color: var(--secondary);
 }
+
 
 /* ===========================
    QUOTE FORM SECTION
