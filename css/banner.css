@@ -416,10 +416,10 @@
       }
 
     .slide-content {
-      left: 22%;
+      left: 4%;
       right: 4%;
       max-width: 76%;
-      top: 116px;
+      /* top: 116px; */
     }
 
       .slide-content h1 {
