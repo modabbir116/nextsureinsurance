@@ -127,7 +127,7 @@ class HeroSlider {
       },
       {
         src: 'images/car.jpg',
-        alt: 'Car Insurance',
+        alt: 'Motor Insurance',
         title: 'Drive Without Worries',
         text: 'Enjoy every ride with full car insurance coverage.',
         btn: 'View Details',
@@ -176,7 +176,8 @@ class HeroSlider {
       div.innerHTML = `
         <img src="${slide.src}" alt="${slide.alt}">
         <div class="slide-content">
-          <h1>${slide.title}</h1>
+          <h1>${slide.alt}</h1>
+          <h3>${slide.title}</h3>
           <p>${slide.text}</p>
           <a href="${slide.link}" class="btn">${slide.btn}</a>
         </div>
