@@ -210,3 +210,46 @@ body {
   text-align: center;
   padding: 2rem 0;
 }
+
+
+/* ===== MEDIA QUERIES ===== */
+
+/* Tablet devices */
+@media (max-width: 768px) {
+  
+}
+
+/* Mobile devices */
+@media (max-width: 480px) {
+  .container {
+    padding: 15px 20px !important;
+  }
+    .hero-text h1 {
+    font-size: 16px;
+    
+  }
+    .hero-text p {
+    font-size: 14px;
+  }
+  .hamburger {
+    display: block;
+    width: 28px;
+    height: 3px;
+    background: var(--primary);
+    border-radius: 3px;
+    position: relative;
+    transition: var(--transition);
+    right: -70px !important;
+  }
+}
+
+/* Extra small devices */
+@media (max-width: 360px) {
+    .hero-text h1 {
+    font-size: 16px;
+    
+  }
+      .hero-text p {
+    font-size: 14px;
+  }
+}

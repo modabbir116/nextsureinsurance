@@ -401,11 +401,11 @@
     /* Mobile Devices - 480px */
     @media (max-width: 480px) {
       .hero {
-        min-height: 304px;
+        min-height: 210px;
       }
 
      .slider {
-        height: 300px;
+        height: 219px;
       }
 
       .slide-content {
