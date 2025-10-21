@@ -8,11 +8,12 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
   <style>
     :root{
-      --dark-bg:#071226; --dark-card:rgba(255,255,255,0.03); --muted:#9fb0c8; --accent:#3b82f6; --success:#10b981; --danger:#ef4444; --warn:#f59e0b; --text:#e6eef6;
-      --light-bg:#f4f7fb; --light-card:#ffffff; --muted-light:#000000; --text-light:#0b1220;
+      --page-bg:#ffffff;
+      --card-bg:#fdfdff;
+      --text-c:#000000;
+      --muted-c:#000000;
+      --accent-c:#10d01d;
     }
-    html[data-theme='dark']{ --page-bg:var(--dark-bg); --card-bg:var(--dark-card); --muted-c:var(--muted); --text-c:var(--text); --accent-c:var(--accent); }
-    html[data-theme='light']{ --page-bg:var(--light-bg); --card-bg:var(--light-card); --muted-c:var(--muted-light); --text-c:var(--text-light); --accent-c:var(--accent); }
 
     *{box-sizing:border-box}
     body{font-family:Inter,system-ui,Arial;background:var(--page-bg);color:var(--text-c);margin:0;padding:22px}
@@ -28,9 +29,8 @@
     input, select, textarea{width:100%;padding:10px;border-radius:8px;border:1px solid #000000;background:transparent;color:var(--text-c);margin-top:6px}
     .row{display:flex;gap:10px}
     .col{flex:1}
-    .btn{padding:10px 14px;border-radius:8px;border:none;cursor:pointer;background:var(--accent-c);color:#fff;font-weight:600}
-    .btn.ghost{background:transparent;border:1px solid rgba(0,0,0,0.06);color:var(--text-c)}
-    .result{margin-top:12px;padding:12px;border-radius:8px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));color:var(--text-c)}
+    .btn{padding:10px 14px;border-radius:8px;border:none;cursor:pointer;background:var(--accent-c);color:#000000;font-weight:600}
+    .btn.ghost{background:transparent;border:1px solid #ffffff;color:var(--text-c)}
     .muted{color:var(--muted-c);font-size:13px;margin-top:6px}
     .small{font-size:13px;color:var(--muted-c)}
     .themeRow{display:flex;align-items:center;gap:8px}
@@ -46,11 +46,11 @@
       <!-- LEFT: Calculator -->
       <div class="card" id="calcCard">
         <h3 style="margin:0">Travel Insurance Calculator</h3>
-        <p class="small muted">Fill required fields, click Calculate → see price → Confirm & Save & Notify</p>
+        <p class="small muted">Fill required fields, click Calculate → see price → Continue Order</p>
 
        
 
-        <label>Plan Insurance Category Plan</label>
+        <label><strong>Plan Insurance Category Plan</strong></label>
         <select id="plan">
           <option value="">Select Plan</option>
           <option>Plan A — Schengen (Worldwide Excl. USA & Canada)</option>
@@ -65,46 +65,38 @@
 
         <div class="row">
           <div class="col">
-            <label>Date of Birth</label>
+            <label><strong>Date of Birth</strong></label>
             <input type="date" id="dob" onchange="autoAgeBand()">
           </div>
           <div class="col">
-            <label>Age Band</label>
+            <label><strong>Age Band</strong></label>
             <select id="age">
-              <option>0.5-40</option><option>41-50</option><option>51-65</option><option>66-70</option><option>71-75</option><option>76-79</option><option>80-85</option><option>41-59</option>
+              <option>0.5-40</option><option>41-50</option><option>51-65</option><option>66-70</option><option>71-75</option><option>76-79</option><option>80-85</option> <option>Only_student_41-59</option> 
             </select>
           </div>
         </div>
 
-        <label>Travel Duration (Days)</label>
+        <label><strong>Travel Duration (Days)</strong></label>
         <select id="days">
           <option>1-14</option><option>15-21</option><option>22-28</option><option>29-35</option><option>36-47</option><option>48-60</option><option>61-75</option><option>76-90</option><option>91-120</option><option>121-147</option><option>148-180</option><option>6month</option><option>12month</option>
         </select>
 
-      
-       
-
         <div class="row">
           <div class="col">
-            <label>Multiplier</label>
+            <label><strong>Multiplier</strong></label>
             <input type="number" id="multiplier" value="1" step="0.01" min="0.01">
           </div>
           <div class="col">
-            <label>Special Offer (%)</label>
+            <label><strong>Special Offer (%)</strong></label>
             <input type="number" id="adminDiscount" value="0" min="0" max="100">
           </div>
         </div>
-
-
         <div style="margin-top:12px;display:flex;gap:8px">
           <button class="btn" onclick="calculate()">Calculate</button>
-          <button class="btn ghost" onclick="resetCalc()">Clear</button>
         </div>
-
         <div class="result" id="result" style="display:none"></div>
-
         <div style="margin-top:10px">
-          <button class="btn" id="confirmBtn" style="display:none" onclick="confirmOrder()"><a href="Oder.html"> Continue</button></a>
+          <button class="btn" id="confirmBtn" style="display:none" onclick="confirmOrder()"><a href="Oder from.html"> Continue</button></a>
         </div>
 
       </div>
@@ -151,10 +143,10 @@
       "76-79": {"1-14":60720,"15-21":65052,"22-28":75358,"29-35":88910,"36-47":108420,"48-60":176187,"61-75":254784,"76-90":306291},
       "80-85": {"1-14":86742, "15-21":92931,"22-28":107653,"29-35":127013,"36-47":154886,"48-60":251694}
     },
-    "Plan C — Study (Excl. USA & Canada) Schengen": {"0.5-40":{"6month":13956,"12month":27912},"41-59":{"6month":21072,"12month":42144}},
-    "Plan D — Study (Incl. USA & Canada) Schengen": {"0.5-40":{"6month":22470,"12month":44940},"41-59":{"6month":42498,"12month":84996}},
-    "Plan C — Study (Excl. USA & Canada) Non—Schengen": {"0.5-40":{"6month":11166,"12month":22332},"41-59":{"6month":16860,"12month":33720}},
-    "Plan D — Study (Incl. USA & Canada) Non—Schengen": {"0.5-40":{"6month":17976,"12month":35952},"41-59":{"6month":34002,"12month":68004}}
+    "Plan C — Study (Excl. USA & Canada) Schengen": {"0.5-40":{"6month":13956,"12month":27912},"41-50":{"6month":21072,"12month":42144}},
+    "Plan D — Study (Incl. USA & Canada) Schengen": {"0.5-40":{"6month":22470,"12month":44940},"41-50":{"6month":42498,"12month":84996}},
+    "Plan C — Study (Excl. USA & Canada) Non—Schengen": {"0.5-40":{"6month":11166,"12month":22332},"41-50":{"6month":16860,"12month":33720}},
+    "Plan D — Study (Incl. USA & Canada) Non—Schengen": {"0.5-40":{"6month":17976,"12month":35952},"41-50":{"6month":34002,"12month":68004}}
   };
 
   /* -------------------------
@@ -181,7 +173,6 @@
     let band = '';
     if(age <= 40) band='0.5-40';
     else if(age <= 50) band='41-50';
-    else if(age <= 59) band='41-59';
     else if(age <= 65) band='51-65';
     else if(age <= 70) band='66-70';
     else if(age <=75) band='71-75';

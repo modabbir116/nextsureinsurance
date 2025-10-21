@@ -10,14 +10,12 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <style>
 :root {
-  --dark-bg:#0f172a;--dark-card:#1e293b;--light-bg:#f4f7fb;--light-card:#fff;
+ 
   --accent:#3b82f6;--success:#10b981;--danger:#ef4444;--warn:#f59e0b;
 }
-html[data-theme='dark'] {--bg:var(--dark-bg);--card:var(--dark-card);--text:#f9fafb;}
-html[data-theme='light']{--bg:var(--light-bg);--card:var(--light-card);--text:#111827;}
+
 body {
-  margin:0;font-family:Inter,system-ui;background:var(--bg);color:var(--text);
-  transition:background 0.3s,color 0.3s;
+  background-color: #f9feff78;
 }
 .container{max-width:100%;margin:auto;padding:25px;}
 .card{background:var(--card);border-radius:12px;padding:50px;margin-bottom:20px;box-shadow:0 3px 10px #ffffff; }
@@ -31,7 +29,7 @@ th,td{padding:8px;border-bottom:1px solid rgba(255,255,255,0.1);}
 th{background:rgba(255,255,255,0.05);}
 tr.pending{background:#ffffff;}
 tr.processing{background:#3b83f64f;}
-tr.underwriting_done{background:#ee4a2da0;}
+tr.underwriting_done{background:#de2d0ea0;}
 tr.deleted{background:#7977774e;}
 .statusSelect{padding:30px;border-radius:20px;text-align: left;}
 .action-btns{display:flex;gap:6px;}
@@ -110,15 +108,10 @@ tr.deleted{background:#7977774e;}
 
 </style>
 </head>
-<header>
 
-
-
-</header>
 <body>
   <a href="travel rate .html"><img src="NextSure logo New.png" width="120" alt="logo"></a> 
 
-<button class="btn ghost" id="themeToggle" style="position:absolute;right:20px;top:20px;"> Dark</button>
 
 <div id="loginBox" class="login">
   <h2>Admin Login</h2>
@@ -165,9 +158,6 @@ tr.deleted{background:#7977774e;}
   <button class="btn" style="background:#16a34a;color:white;" onclick="generateInvoice()">🧾 Generate Invoice</button>
 </div>
 
-
-
-
   <input type="date" id="startDate" style="padding:5px;border-radius:5px;">
   <input type="date" id="endDate" style="padding:5px;border-radius:5px;">
   <button class="btn primary" onclick="exportByDate()">📥 Export by Date</button>
@@ -179,7 +169,7 @@ tr.deleted{background:#7977774e;}
 
         <thead>
           <tr>
-           <th></th> <th>Date & Time</th><th></th><th>Order ID</th><th>Company</th><th></th><th></th><th>Plan</th><th></th><th></th><th>DOB</th><th>Age Band</th><th>Duration</th>
+           <th></th> <th>Date & Time</th><th></th><th>Order ID</th><th>Details</th><th>Company</th><th></th><th></th><th>Plan</th><th></th><th></th><th>DOB</th><th>Age Band</th><th>Duration</th>
             <th>Destination</th><th>Occupation</th><th>Travel Date</th><th>Mobile</th>
             <th>Multiplier</th><th>Offer</th><th>Total</th><th>Status</th><th>Action</th>
 
@@ -277,16 +267,6 @@ async function downloadSelectedPDF() {
   doc.save("Selected_Orders.pdf");
 }
 
-const themeToggle=document.getElementById('themeToggle');
-function applyTheme(){
-  const t=localStorage.getItem('ns_theme')||'dark';
-  document.documentElement.setAttribute('data-theme',t);
-  themeToggle.textContent=t==='dark'?'☀️ Light':'🌙 Dark';
- 
-}
-themeToggle.onclick=()=>{const c=document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark';localStorage.setItem('ns_theme',c);applyTheme();};
-function changeTheme(v){localStorage.setItem('ns_theme',v);applyTheme();}
-applyTheme();
 
 /* Login */
 function login(){if(user.value==='a'&&pass.value==='1'){localStorage.setItem('isAdmin','true');initDashboard();}else alert('❌ Wrong credentials');}
@@ -618,6 +598,115 @@ createMessage();
     </div>
   </div>
 </div>
+<!-- === Firebase Firestore + Authentication Integration === -->
+<script type="module">
+ // Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyCXhfBmVjh--qFtwcMjWMR5TRu80hOe5wc",
+  authDomain: "nextsure-admin.firebaseapp.com",
+  projectId: "nextsure-admin",
+  storageBucket: "nextsure-admin.firebasestorage.app",
+  messagingSenderId: "736664254101",
+  appId: "1:736664254101:web:32c59df3ea8cca168b0d9c",
+  measurementId: "G-ZS2MWTK52K"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+  const auth = getAuth(app);
+
+  // 🟢 Login Form
+  async function login() {
+    const email = document.getElementById('user').value;
+    const password = document.getElementById('pass').value;
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      alert("✅ Login successful!");
+      document.getElementById('loginBox').style.display = 'none';
+      document.getElementById('dashboard').style.display = 'block';
+      loadOrdersFromFirestore();
+    } catch (err) {
+      alert("❌ Login failed: " + err.message);
+    }
+  }
+  window.login = login;
+
+  // 🔴 Logout
+  async function logout() {
+    await signOut(auth);
+    document.getElementById('loginBox').style.display = 'block';
+    document.getElementById('dashboard').style.display = 'none';
+  }
+  window.logout = logout;
+
+  // 🟣 Firestore: Load All Orders
+  async function loadOrdersFromFirestore() {
+    const querySnapshot = await getDocs(collection(db, "orders"));
+    const orders = [];
+    querySnapshot.forEach((docSnap) => {
+      orders.push({ id: docSnap.id, ...docSnap.data() });
+    });
+    localStorage.setItem('orders', JSON.stringify(orders));
+    renderTable();
+  }
+
+  // 🟡 Firestore: Save New Order
+  async function saveOrderToFirestore(order) {
+    await addDoc(collection(db, "orders"), order);
+  }
+
+  // 🟠 Firestore: Update Order
+  async function updateOrderInFirestore(orderId, updatedData) {
+    const ref = doc(db, "orders", orderId);
+    await updateDoc(ref, updatedData);
+  }
+
+  // 👀 Auth State Listener
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      document.getElementById('loginBox').style.display = 'none';
+      document.getElementById('dashboard').style.display = 'block';
+      loadOrdersFromFirestore();
+    } else {
+      document.getElementById('loginBox').style.display = 'block';
+      document.getElementById('dashboard').style.display = 'none';
+    }
+  });
+
+  /* ✏️ Modify your existing saveDetails() */
+  window.saveDetails = async function() {
+    if (!currentEditId) return alert('⚠️ No order selected');
+    const orders = JSON.parse(localStorage.getItem('orders') || '[]');
+    const idx = orders.findIndex(o => o.orderId === currentEditId);
+    if (idx === -1) return alert('⚠️ Order not found');
+
+    const updated = {...orders[idx]};
+    Object.keys(updated).forEach(key => {
+      const el = document.getElementById(`edit_${key}`);
+      if (el) updated[key] = el.value;
+    });
+
+    // ✅ Update Firestore
+    try {
+      await updateOrderInFirestore(updated.id || currentEditId, updated);
+      orders[idx] = updated;
+      localStorage.setItem('orders', JSON.stringify(orders));
+      alert("✅ Order updated in Firestore!");
+      closeDetails();
+      renderTable();
+    } catch (err) {
+      alert("❌ Firestore update failed: " + err.message);
+    }
+  };
+</script>
 
 </body>
 </html>
