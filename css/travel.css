@@ -146,6 +146,10 @@
       line-height: 1.9;
       margin: 0;
     }
+    .question_body{
+      color: #64748b;
+      font-size: 15px;
+    }
 
 .buybutton a {
   display: inline-block;
